@@ -19,17 +19,19 @@ namespace mnLib
 	/* クラスの宣言 */
 	class Window
 	{
+	private:
 		/* メンバ変数 */
 		// ウインドウハンドル
 		HWND mHwnd;
 		// 自身のポインタ
 		Window* mSelf;
 
+	public:
 		/* メンバ関数 */
 		// コンストラクタ
-		Window() = default;
+		Window() {}
 		// デストラクタ
-		~Window() = default;
+		~Window() {}
 		// 初期化
 		HRESULT WindowsInitialize(HINSTANCE hInstance, int nShowCmd);
 		HRESULT WindowsInitialize(HINSTANCE hInstance, int nShowCmd, int width, int height);

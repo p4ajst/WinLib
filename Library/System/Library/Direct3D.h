@@ -58,8 +58,8 @@
 //	/* クラスの宣言 */
 //	class Direct3D
 //	{
-//		/* メンバ変数 */
 //	private:
+//		/* メンバ変数 */
 //		// ウインドウハンドル
 //		HWND mHwnd;
 //		//// デバイス
@@ -110,8 +110,8 @@
 //		// 画面のサイズ（高さ）
 //		int mHeight;
 //
-//		/* メンバ関数 */
 //	public:
+//		/* メンバ関数 */
 //		// 初期化処理
 //		HRESULT Initialize(HWND windowHandle);
 //		// 更新処理
