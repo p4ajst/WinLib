@@ -117,11 +117,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Direct3D.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Source\WinMain.cpp" />
+    <ClCompile Include="System\Library\Device.cpp" />
+    <ClCompile Include="System\Library\Direct3D.cpp" />
+    <ClCompile Include="System\Library\Window.cpp" />
+    <ClCompile Include="System\System.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Direct3D.h" />
+    <ClInclude Include="System\Library\Device.h" />
+    <ClInclude Include="System\Library\Direct3D.h" />
+    <ClInclude Include="System\Library\Window.h" />
+    <ClInclude Include="System\System.h" />
+    <ClInclude Include="Utility\Color.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

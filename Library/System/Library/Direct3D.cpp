@@ -1,274 +1,456 @@
-//// ------------------------------------------------------------------------------------------------ //
-//// @ file	 : Direct3D.h                                                                           //
-//// @ brief	 : DirectXŠÖ˜A‚ÌƒNƒ‰ƒX                                                                  //
-//// @ date	 : 2017/10/29                                                                           //
-//// @ author  : Madoka Nakajima                                                                      //
-//// @ note	 :                                                                                      //
-//// ------------------------------------------------------------------------------------------------ // 
-//
-///* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-//// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
-//#include "Direct3D.h"
-//#include "../../Utility/Color.h"
-//
-///* –¼‘O‹óŠÔ */
-//// ©ì–¼‘O‹óŠÔ
-//using namespace mnLib;
-//
-///* ƒ}ƒNƒ‚Ì’è‹` */
-//#pragma region DefinitionMacro
-//// ŠJ•ú—pƒ}ƒNƒ
-//#define SAFE_RELEASE(x){if(x){(x)->Releace();(x) = NULL}}
-//#pragma endregion ƒ}ƒNƒ‚Ì’è‹`
-//
-//
-///* ’è”‚Ì’è‹` */
-///* •Ï”‚Ì’è‹` */
-///* —ñ‹“‘Ì‚Ì’è‹` */
-///* \‘¢‘Ì‚Ì’è‹` */
-///* ƒƒ“ƒoŠÖ”‚Ì’è‹` */
-///* ŠÖ”‚Ì’è‹` */
-//
-//// ------------------------------------------------------------------------------------------------ //
-//// @ brief   : ‰Šú‰»                                                                               //
-//// @ param   : HWND whandle....ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹                                                   //
-//// @ return  : HRESULT....HRESULT‚ª‚O‚È‚ç³íA‚»‚êˆÈŠO‚Ì’l‚È‚çˆÙíB                               //
-//// @ note    :                                                                                      //
-//// ------------------------------------------------------------------------------------------------ // 
-//HRESULT Direct3D::Initialize(HWND windowHandle)
-//{
-//	// –ß‚è’l
-//	HRESULT hrlt;
-//#pragma region InitMemberVariable
-//	mHwnd = windowHandle;
-//	//pDevice.Reset();
-//	//pContext.Reset();
-//	//pSwapChain.Reset();
-//	//pRenderTargetView.Reset();
-//	//pBackBuffer.Reset();
-//	//pDepthStencil.Reset();
-//	//pDepthStencilView.Reset();
-//	//pInterface.Reset();
-//	//pAdapter.Reset();
-//	//pFactory.Reset();
-//	
-//	pDevice = nullptr;
-//	pContext = nullptr;
-//	pSwapChain = nullptr;
-//	pRenderTargetView = nullptr;
-//	pBackBuffer = nullptr;
-//	pDepthStencil = nullptr;
-//	pDepthStencilView = nullptr;
-//	pInterface = nullptr;
-//	pAdapter = nullptr;
-//	pFactory = nullptr;
-//
-//	mWidth = 0;
-//	mHeight = 0;
-//#pragma endregion ƒƒ“ƒo•Ï”‚Ì‰Šú‰»
-//
-//#pragma region SetScreenSize
-//	// ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚ğŠi”[‚·‚é•Ï”
-//	RECT rc;
-//
-//	// ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ìæ“¾
-//	GetClientRect(mHwnd, &rc);
-//	// •‚ÌŒvZ
-//	mWidth = rc.right - rc.left;
-//	// ‚‚³‚ÌŒvZ
-//	mHeight = rc.bottom - rc.top;
-//
-//#pragma endregion ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚ğæ“¾‚µ‚Ä‰æ–ÊƒTƒCƒY‚ğZo
-//
-//#pragma region FunctionLevel
-//	// ƒVƒF[ƒ_[ƒ‚ƒfƒ‹‚T‚È‚Ç‚ÌDirect3D 11.0 ‚ÅƒTƒ|[ƒg‚³‚ê‚Ä‚¢‚é‹@”\‚ğƒ^[ƒQƒbƒg‚Æ‚·‚é
-//	// ‹@”\ƒŒƒxƒ‹‚Ì”z—ñ
-//	D3D_FEATURE_LEVEL dfl[] =
-//	{
-//		D3D_FEATURE_LEVEL_11_1,
-//		D3D_FEATURE_LEVEL_11_0,
-//		D3D_FEATURE_LEVEL_10_1,
-//		D3D_FEATURE_LEVEL_10_0,
-//		D3D_FEATURE_LEVEL_9_3,
-//		D3D_FEATURE_LEVEL_9_2,
-//		D3D_FEATURE_LEVEL_9_1,
-//	};
-//	// ”z—ñ‚Ì—v‘f”
-//	UINT featurelefels = 7;
-//	// ƒfƒoƒCƒXì¬‚É•Ô‚³‚ê‚é‹@”\ƒŒƒxƒ‹
-//	D3D_FEATURE_LEVEL dfl_Supported = D3D_FEATURE_LEVEL_11_1;
-//#pragma endregion ‹@”\ƒŒƒxƒ‹‚Ì”z—ñ
-//
-//#pragma region SetSwapChain
-//
-//	/* ƒfƒoƒCƒX‚ÆƒXƒƒbƒvƒ`ƒFƒCƒ“‚Ìİ’è */
-//	DXGI_SWAP_CHAIN_DESC swapChainDesc;
-//	// \‘¢‘Ì‚Ì’l‚ğ‰Šú‰»
-//	SecureZeroMemory(&swapChainDesc, sizeof(swapChainDesc));
-//	// ƒoƒbƒNƒoƒbƒtƒ@‚Ì”
-//	swapChainDesc.BufferCount = 2;
-//	/// ƒfƒBƒXƒvƒŒƒCƒ‚[ƒh‚ğİ’è‚·‚é\‘¢‘Ì
-//	// ƒoƒbƒNƒoƒbƒtƒ@‚Ì•
-//	swapChainDesc.BufferDesc.Width = 640;
-//	// ƒoƒbƒNƒoƒbƒtƒ@‚Ì‚‚³
-//	swapChainDesc.BufferDesc.Height = 480;
-//	// ƒfƒBƒXƒvƒŒƒCƒtƒH[ƒ}ƒbƒg
-//	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-//	// ƒŠƒtƒŒƒbƒVƒ…ƒŒ[ƒgi•ªqj
-//	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
-//	// ƒŠƒtƒŒƒbƒVƒ…ƒŒ[ƒgi•ª•êj
-//	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
-//	// ƒXƒLƒƒƒ“ƒ‰ƒCƒ“•`‰æƒ‚[ƒh
-//	swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-//	// ƒXƒP[ƒŠƒ“ƒOƒ‚[ƒh
-//	swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-//	/// ƒoƒbƒNƒoƒbƒtƒ@‚Ìg‚í‚ê•û‚ğw’è‚·‚éƒtƒ‰ƒO
-//	/// ƒoƒbƒNƒoƒbƒtƒ@‚ÍƒVƒF[ƒ_“ü—Í‚Ü‚½‚Í•`‰æƒ^[ƒQƒbƒg‚Æ‚µ‚Äg‚¤‚±‚Æ‚ª‚Å‚«‚é
-//	// ƒoƒbƒNƒoƒbƒtƒ@‚Ìg—p–@
-//	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-//	/// o—ÍæƒEƒCƒ“ƒhƒE‚Ìƒnƒ“ƒhƒ‹
-//	// ŠÖ˜A•t‚¯‚éƒEƒCƒ“ƒhƒE
-//	swapChainDesc.OutputWindow = windowHandle;
-//	// ƒ}ƒ‹ƒ`ƒTƒ“ƒvƒ‹‚Ì”
-//	swapChainDesc.SampleDesc.Count = 1;
-//	// ƒ}ƒ‹ƒ`ƒTƒ“ƒvƒ‹‚ÌƒNƒIƒŠƒeƒB
-//	swapChainDesc.SampleDesc.Quality = 0;
-//	/// ƒXƒƒbƒvŒø‰Ê‚ğw’è‚·‚éƒtƒ‰ƒO
-//	/// ‰æ–Êƒ‚[ƒh‚Ìİ’è
-//	/// ƒEƒCƒ“ƒhƒEƒ‚[ƒh‚Å‚ ‚ê‚ÎuTRUEv
-//	/// ƒtƒ‹ƒXƒNƒŠ[ƒ“ƒ‚[ƒh‚Å‚ ‚ê‚ÎuFalsev
-//	// ƒEƒCƒ“ƒhƒEƒ‚[ƒh
-//	swapChainDesc.Windowed = TRUE;
-//	// ƒXƒƒbƒvŒø‰Ê
-//	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-//	// ƒ‚[ƒh‚Ì©“®Ø‚è‘Ö‚¦
-//	swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
-//
-//#pragma endregion ƒXƒƒbƒvƒ`ƒFƒCƒ“‚Ìİ’è
-//
-//#pragma region CreateDeviceAndSwapChain
-//	// @brief  : uID3D11DeviceƒCƒ“ƒ^[ƒtƒF[ƒXv‚ÆuID3D11DiveceContextƒCƒ“ƒ^[ƒtƒF[ƒXv‚ÆuIDXGISwapChainƒCƒ“ƒ^[ƒtƒF[ƒXv‚ğ“¯‚Éì¬
-//	// @param  : IDXGIAdapter* pAdapter....•\¦‚Ég‚¤ƒfƒBƒXƒvƒŒƒCƒfƒoƒCƒX‚ğw’è
-//	// @param  : D3D_DRIVER_TYPE DriverType....ƒfƒoƒCƒX‚Ìƒhƒ‰ƒCƒoƒ^ƒCƒv‚ğw’è
-//	// @param  : HMODULE SoftWare....ƒ\ƒtƒgƒEƒFƒAƒ‰ƒXƒ^ƒ‰ƒCƒU‚ªÀ‘•‚³‚ê‚Ä‚¢‚éDLL‚Ìƒnƒ“ƒhƒ‹‚ğw’è
-//	// @param  : UINT Flags....g—p‚·‚éDirect3D 11‚ÌAPIƒŒƒCƒ„[‚ğ—ñ‹“Œ^‚Ì‘g‚İ‡‚í‚¹‚Åw’è‚·‚é
-//	// @param  : const D3D_FEATURE_LEVEL* pFeatureLevel....ì¬‚ğ‚İ‚é‹@”\ƒŒƒxƒ‹‚ğ—Dæ‡ˆÊ‚Ì‚‚¢‡‚É•À‚×‚½”z—ñ
-//	// @param  : UINT FeatureLevels....pFeatureLevel‚Åw’è‚µ‚½”z—ñ‚Ì—v‘f”
-//	// @param  : UINT SDKVersion....SDKƒo[ƒWƒ‡ƒ“‚ğw’è
-//	// @param  : const DXGI_SWAP_CHAIN_DESC* pSwapChainDesc....ì‚éƒXƒƒbƒvƒ`ƒFƒCƒ“‚Ìİ’è‚ğ‹Lq‚·‚é\‘¢‘Ì‚ğ“n‚·
-//	// @param  : IDXGISwapChain** ppSwapChain....ì‚ç‚ê‚½ƒXƒƒbƒvƒ`ƒFƒCƒ“‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX‚ğó‚¯æ‚é•Ï”‚Ìƒ|ƒCƒ“ƒ^‚ğ“n‚·
-//	// @param  : ID3D11Device ppDevice....ì‚Á‚½ƒfƒoƒCƒX‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX‚ğó‚¯æ‚é•Ï”‚Ìƒ|ƒCƒ“ƒ^‚ğ“n‚·
-//	// @param  : D3D_FEATURE_LEVEL* pFeatureLevel....ƒTƒ|[ƒg‚³‚ê‚Ä‚¢‚é‹@”\ƒŒƒxƒ‹‚ğó‚¯æ‚é•Ï”‚Ìƒ|ƒCƒ“ƒ^
-//	// @param  : ID3D11DeviceContext** ppImmidiateContext....ì‚Á‚½ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX‚ğó‚¯æ‚é•Ï”‚Ìƒ|ƒCƒ“ƒ^‚ğ“n‚·
-//
-//
-//
-//#pragma endregion ƒfƒoƒCƒX‚ÆƒXƒƒbƒvƒ`ƒFƒCƒ“‚Ìì¬
-//
-//
-//
-//#pragma region StencilTexture
-//
-//
-//#pragma endregion ƒXƒeƒ“ƒVƒ‹—pƒeƒNƒXƒ`ƒƒ
-//
-//#pragma region StencelTarget
-//
-//#pragma endregion ƒXƒeƒ“ƒVƒ‹ƒ^[ƒQƒbƒg
-//
-//#pragma region GetBackBuffer
-//
-//#pragma endregion ƒXƒƒbƒvƒ`ƒFƒCƒ“‚ÌƒoƒbƒNƒoƒbƒtƒ@‚ğæ“¾
-//
-//#pragma region CreateRenderTarget
-//
-//#pragma endregion ƒoƒbƒNƒoƒbƒtƒ@‚©‚ç•`‰æƒ^[ƒQƒbƒg‚ğ¶¬
-//
-//#pragma region SetContext
-//
-//#pragma endregion •`‰æƒ^[ƒQƒbƒg‚ğƒRƒ“ƒeƒLƒXƒg‚Éİ’è
-//
-//#pragma region SetViewport
-//
-//#pragma endregion ƒrƒ…[ƒ|[ƒg‚Ìİ’è
-//
-//#pragma region GetInterface
-//
-//#pragma endregion ƒCƒ“ƒ^[ƒtƒF[ƒX‚ğæ“¾
-//
-//#pragma region GetAdapter
-//
-//#pragma endregion ƒtƒ@ƒNƒgƒŠ‚ğæ“¾
-//
-//#pragma region ArrowFullScreen
-//
-//
-//#pragma endregion ƒtƒ‹ƒXƒNƒŠ[ƒ“‚ğ‹–‰Â
-//
-//
-//
-//
-//
-//	return hrlt;
-//}
-//
-//void Direct3D::Update()
-//{
-//}
-//
-//void Direct3D::Render()
-//{
-//}
-//
-//void Direct3D::CleanUp()
-//{
-//	delete pDevice;
-//	delete pContext;
-//	delete pSwapChain;
-//	delete pRenderTargetView;
-//	delete pBackBuffer;
-//	delete pDepthStencil;
-//	delete pDepthStencilView;
-//	delete pInterface;
-//	delete pAdapter;
-//	delete pFactory;
-//}
-//
-//// ------------------------------------------------------------------------------------------------ //
-//// @ brief   : ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[‚Ì¶¬                                                       //
-//// @ param   : ‚È‚µ                                                                                 //
-//// @ return  : ‚È‚µ                                                                                 //
-//// @ note    :                                                                                      //
-//// ------------------------------------------------------------------------------------------------ // 
-//void Direct3D::CreateRenderTargetView()
-//{
-//	// ¶¬
-//	//pContext->ClearRenderTargetView(pRenderTargetView.Get(), DxColors::FloralWhite);
-//	pContext->ClearRenderTargetView(pRenderTargetView, DxColors::FloralWhite);
-//
-//}
-//
-//// ------------------------------------------------------------------------------------------------ //
-//// @ brief   : [“xƒoƒbƒtƒ@‚Ì¶¬                                                                   //
-//// @ param   : ‚È‚µ                                                                                 //
-//// @ return  : ‚È‚µ                                                                                 //
-//// @ note    :                                                                                      //
-//// ------------------------------------------------------------------------------------------------ // 
-//void Direct3D::CreateDepthStencilView()
-//{
-//	// ¶¬
-//	//pContext->ClearDepthStencilView(pDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-//	pContext->ClearDepthStencilView(pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-//}
-//
-//// ------------------------------------------------------------------------------------------------ //
-//// @ brief   : ƒoƒbƒNƒoƒbƒtƒ@‚ÌƒXƒƒbƒv                                                             //
-//// @ param   : ‚È‚µ                                                                                 //
-//// @ return  : ‚È‚µ                                                                                 //
-//// @ note    :                                                                                      //
-//// ------------------------------------------------------------------------------------------------ // 
-//void Direct3D::SwapBackBaffer()
-//{
-//	// ƒoƒbƒNƒoƒbƒtƒ@‚ÌƒXƒƒbƒv
-//	pSwapChain->Present(0, 0);
-//}
+ï»¿// ------------------------------------------------------------------------------------------------ //
+// @ file   : Direct3D.h                                                                           //
+// @ brief  : DirectXé–¢é€£ã®ã‚¯ãƒ©ã‚¹                                                                  //
+// @ date   : 2017/10/29                                                                           //
+// @ author : Madoka Nakajima                                                                      //
+// @ note   :                                                                                      //
+// ------------------------------------------------------------------------------------------------ // 
+
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
+#include "Direct3D.h"
+#include "../../Utility/Color.h"
+
+/* åå‰ç©ºé–“ */
+// è‡ªä½œåå‰ç©ºé–“
+using namespace mnLib;
+
+/* ãƒã‚¯ãƒ­ã®å®šç¾© */
+#pragma region DefinitionMacro
+// é–‹æ”¾ç”¨ãƒã‚¯ãƒ­
+#define SAFE_RELEASE(x){if(x){(x)->Releace();(x) = NULL}}
+#pragma endregion ãƒã‚¯ãƒ­ã®å®šç¾©
+
+
+/* ãƒ¡ãƒ³ãƒé–¢æ•°ã®å®šç¾© */
+// ------------------------------------------------------------------------------------------------ //
+// @ brief   : åˆæœŸåŒ–                                                                               //
+// @ param   : HWND whandle....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«                                                   //
+// @ return  : HRESULT....HRESULTãŒï¼ãªã‚‰æ­£å¸¸ã€ãã‚Œä»¥å¤–ã®å€¤ãªã‚‰ç•°å¸¸ã€‚                               //
+// @ note    :                                                                                      //
+// ------------------------------------------------------------------------------------------------ // 
+HRESULT Direct3D::Initialize(HWND windowHandle)
+{
+	// æˆ»ã‚Šå€¤
+	HRESULT hrlt;
+#pragma region InitMemberVariable
+	mHwnd = windowHandle;
+	pDevice.Reset();
+	pContext.Reset();
+	pSwapChain.Reset();
+	pRenderTargetView.Reset();
+	pBackBuffer.Reset();
+	pDepthStencil.Reset();
+	pDepthStencilView.Reset();
+	pInterface.Reset();
+	pAdapter.Reset();
+	pFactory.Reset();
+
+	mWidth = 0;
+	mHeight = 0;
+#pragma endregion ãƒ¡ãƒ³ãƒå¤‰æ•°ã®åˆæœŸåŒ–
+
+#pragma region SetScreenSize
+	// ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	RECT rc;
+
+	// ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®å–å¾—
+	GetClientRect(mHwnd, &rc);
+	// å¹…ã®è¨ˆç®—
+	mWidth = rc.right - rc.left;
+	// é«˜ã•ã®è¨ˆç®—
+	mHeight = rc.bottom - rc.top;
+
+#pragma endregion ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã‚’å–å¾—ã—ã¦ç”»é¢ã‚µã‚¤ã‚ºã‚’ç®—å‡º
+
+#pragma region FunctionLevel
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ¢ãƒ‡ãƒ«ï¼•ãªã©ã®Direct3D 11.0 ã§ã‚µãƒãƒ¼ãƒˆã•ã‚Œã¦ã„ã‚‹æ©Ÿèƒ½ã‚’ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã™ã‚‹
+	// æ©Ÿèƒ½ãƒ¬ãƒ™ãƒ«ã®é…åˆ—
+	D3D_FEATURE_LEVEL featureLevel[] =
+	{
+		D3D_FEATURE_LEVEL_11_0,
+		D3D_FEATURE_LEVEL_10_1,
+		D3D_FEATURE_LEVEL_10_0,
+		D3D_FEATURE_LEVEL_9_3,
+		D3D_FEATURE_LEVEL_9_2,
+		D3D_FEATURE_LEVEL_9_1,
+	};
+	// ãƒ‡ãƒã‚¤ã‚¹ä½œæˆæ™‚ã«è¿”ã•ã‚Œã‚‹æ©Ÿèƒ½ãƒ¬ãƒ™ãƒ«
+	D3D_FEATURE_LEVEL featureLevelSupported = D3D_FEATURE_LEVEL_11_0;
+#pragma endregion æ©Ÿèƒ½ãƒ¬ãƒ™ãƒ«ã®é…åˆ—
+
+#pragma region SetSwapChain
+
+	/* ãƒ‡ãƒã‚¤ã‚¹ã¨ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®è¨­å®š */
+	DXGI_SWAP_CHAIN_DESC swapChainDesc;
+	// æ§‹é€ ä½“ã®å€¤ã‚’åˆæœŸåŒ–
+	SecureZeroMemory(&swapChainDesc, sizeof(swapChainDesc));
+	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®æ•°
+	swapChainDesc.BufferCount = 2;
+	/// ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒ¢ãƒ¼ãƒ‰ã‚’è¨­å®šã™ã‚‹æ§‹é€ ä½“
+	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®å¹…
+	swapChainDesc.BufferDesc.Width = 640;
+	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®é«˜ã•
+	swapChainDesc.BufferDesc.Height = 480;
+	// ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	// ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒ¬ãƒ¼ãƒˆï¼ˆåˆ†å­ï¼‰
+	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
+	// ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒ¬ãƒ¼ãƒˆï¼ˆåˆ†æ¯ï¼‰
+	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
+	// ã‚¹ã‚­ãƒ£ãƒ³ãƒ©ã‚¤ãƒ³æç”»ãƒ¢ãƒ¼ãƒ‰
+	swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+	// ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°ãƒ¢ãƒ¼ãƒ‰
+	swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+	/// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ä½¿ã‚ã‚Œæ–¹ã‚’æŒ‡å®šã™ã‚‹ãƒ•ãƒ©ã‚°
+	/// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã¯ã‚·ã‚§ãƒ¼ãƒ€å…¥åŠ›ã¾ãŸã¯æç”»ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã—ã¦ä½¿ã†ã“ã¨ãŒã§ãã‚‹
+	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ä½¿ç”¨æ³•
+	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+	/// å‡ºåŠ›å…ˆã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ãƒãƒ³ãƒ‰ãƒ«
+	// é–¢é€£ä»˜ã‘ã‚‹ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦
+	swapChainDesc.OutputWindow = windowHandle;
+	// ãƒãƒ«ãƒã‚µãƒ³ãƒ—ãƒ«ã®æ•°
+	swapChainDesc.SampleDesc.Count = 1;
+	// ãƒãƒ«ãƒã‚µãƒ³ãƒ—ãƒ«ã®ã‚¯ã‚ªãƒªãƒ†ã‚£
+	swapChainDesc.SampleDesc.Quality = 0;
+	/// ã‚¹ãƒ¯ãƒƒãƒ—åŠ¹æœã‚’æŒ‡å®šã™ã‚‹ãƒ•ãƒ©ã‚°
+	/// ç”»é¢ãƒ¢ãƒ¼ãƒ‰ã®è¨­å®š
+	/// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ã§ã‚ã‚Œã°ã€ŒTRUEã€
+	/// ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰ã§ã‚ã‚Œã°ã€ŒFalseã€
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰
+	swapChainDesc.Windowed = TRUE;
+	// ã‚¹ãƒ¯ãƒƒãƒ—åŠ¹æœ
+	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+	// ãƒ¢ãƒ¼ãƒ‰ã®è‡ªå‹•åˆ‡ã‚Šæ›¿ãˆ
+	swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
+
+#pragma endregion ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®è¨­å®š
+
+#pragma region CreateDeviceAndSwapChain
+	// @brief  : ã€ŒID3D11Deviceã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã€ã¨ã€ŒID3D11DiveceContextã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã€ã¨ã€ŒIDXGISwapChainã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã€ã‚’åŒæ™‚ã«ä½œæˆ
+	// @param  : IDXGIAdapter* pAdapter....è¡¨ç¤ºã«ä½¿ã†ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒ‡ãƒã‚¤ã‚¹ã‚’æŒ‡å®š
+	// @param  : D3D_DRIVER_TYPE DriverType....ãƒ‡ãƒã‚¤ã‚¹ã®ãƒ‰ãƒ©ã‚¤ãƒã‚¿ã‚¤ãƒ—ã‚’æŒ‡å®š
+	// @param  : HMODULE SoftWare....ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãŒå®Ÿè£…ã•ã‚Œã¦ã„ã‚‹DLLã®ãƒãƒ³ãƒ‰ãƒ«ã‚’æŒ‡å®š
+	// @param  : UINT Flags....ä½¿ç”¨ã™ã‚‹Direct3D 11ã®APIãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’åˆ—æŒ™å‹ã®çµ„ã¿åˆã‚ã›ã§æŒ‡å®šã™ã‚‹
+	// @param  : const D3D_FEATURE_LEVEL* pFeatureLevel....ä½œæˆã‚’è©¦ã¿ã‚‹æ©Ÿèƒ½ãƒ¬ãƒ™ãƒ«ã‚’å„ªå…ˆé †ä½ã®é«˜ã„é †ã«ä¸¦ã¹ãŸé…åˆ—
+	// @param  : UINT FeatureLevels....pFeatureLevelã§æŒ‡å®šã—ãŸé…åˆ—ã®è¦ç´ æ•°
+	// @param  : UINT SDKVersion....SDKãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’æŒ‡å®š
+	// @param  : const DXGI_SWAP_CHAIN_DESC* pSwapChainDesc....ä½œã‚‹ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®è¨­å®šã‚’è¨˜è¿°ã™ã‚‹æ§‹é€ ä½“ã‚’æ¸¡ã™
+	// @param  : IDXGISwapChain** ppSwapChain....ä½œã‚‰ã‚ŒãŸã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’å—ã‘å–ã‚‹å¤‰æ•°ã®ãƒã‚¤ãƒ³ã‚¿ã‚’æ¸¡ã™
+	// @param  : ID3D11Device ppDevice....ä½œã£ãŸãƒ‡ãƒã‚¤ã‚¹ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’å—ã‘å–ã‚‹å¤‰æ•°ã®ãƒã‚¤ãƒ³ã‚¿ã‚’æ¸¡ã™
+	// @param  : D3D_FEATURE_LEVEL* pFeatureLevel....ã‚µãƒãƒ¼ãƒˆã•ã‚Œã¦ã„ã‚‹æ©Ÿèƒ½ãƒ¬ãƒ™ãƒ«ã‚’å—ã‘å–ã‚‹å¤‰æ•°ã®ãƒã‚¤ãƒ³ã‚¿
+	// @param  : ID3D11DeviceContext** ppImmidiateContext....ä½œã£ãŸãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’å—ã‘å–ã‚‹å¤‰æ•°ã®ãƒã‚¤ãƒ³ã‚¿ã‚’æ¸¡ã™
+	// @return : HRESULTå‹ã®å¤‰æ•°
+	hrlt = D3D11CreateDeviceAndSwapChain
+	(
+		nullptr,
+		D3D_DRIVER_TYPE_HARDWARE,
+		0,
+		D3D11_CREATE_DEVICE_BGRA_SUPPORT,
+		featureLevel,
+		ARRAYSIZE(featureLevel),
+		D3D11_SDK_VERSION,
+		&swapChainDesc,
+		pSwapChain.GetAddressOf(),
+		pDevice.GetAddressOf(),
+		&featureLevelSupported,
+		pContext.GetAddressOf()
+	);
+	if (FAILED(hrlt))
+	{
+		hrlt = D3D11CreateDeviceAndSwapChain
+		(
+			nullptr,
+			D3D_DRIVER_TYPE_WARP,
+			0,
+			D3D11_CREATE_DEVICE_BGRA_SUPPORT,
+			featureLevel,
+			ARRAYSIZE(featureLevel),
+			D3D11_SDK_VERSION,
+			&swapChainDesc,
+			pSwapChain.GetAddressOf(),
+			pDevice.GetAddressOf(),
+			&featureLevelSupported,
+			pContext.GetAddressOf()
+		);
+	}
+
+#pragma endregion ãƒ‡ãƒã‚¤ã‚¹ã¨ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®ä½œæˆ
+
+#pragma region GetBackBuffer
+	// @brief  : ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã‹ã‚‰æœ€åˆã®ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã‚’å–å¾—
+	// @param  : UINT buffer...ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ç•ªå·
+	// @param  : REFIID riid...ãƒãƒƒãƒ•ã‚¡ã«ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
+	// @param  : void** ppSurface...ãƒãƒƒãƒ•ã‚¡ã‚’å—ã‘å–ã‚‹å¤‰æ•°
+	// @return : HRESULTå‹ã®å¤‰æ•°
+	hrlt = pSwapChain->GetBuffer
+	(
+		0,
+		__uuidof(ID3D11Texture2D),
+		(LPVOID*)&pBackBuffer
+	);
+	// å¤±æ•—åˆ¤å®š
+	if (FAILED(hrlt))
+	{
+		// é–¢æ•°ã‚’æŠœã‘ã‚‹
+		return false;
+	}
+#pragma endregion ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã‚’å–å¾—
+
+#pragma region CreateRenderTarget
+	// @brief  : ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œã‚‹
+	// @param  : ID3D11Resource* pResource...ãƒ“ãƒ¥ãƒ¼ã§ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ãƒªã‚½ãƒ¼ã‚¹
+	// @param  : const D3D11_RENDER_TARGET_VIEW_DESC* pDesc...æç”»ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã®å®šç¾©
+	// @param  : ID3D11_RenderTagetView* ppRTView...æç”»ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã‚’å—ã‘å–ã‚‹å¤‰æ•°
+	// @return : HRESULTå‹ã®å¤‰æ•°
+	hrlt = pDevice->CreateRenderTargetView
+	(
+		pBackBuffer.Get(),
+		nullptr,
+		&pRenderTargetView
+	);
+	// å¤±æ•—åˆ¤å®š
+	if (FAILED(hrlt))
+	{
+		// é–¢æ•°ã‚’æŠœã‘ã‚‹
+		return false;
+	}
+#pragma endregion ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã‹ã‚‰æç”»ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ç”Ÿæˆ
+
+
+
+#pragma region SetRenderTarget
+	// @brief  : æç”»ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã‚’å‡ºåŠ›ãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®æç”»ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã—ã¦è¨­å®š
+	// @param  : UINT æç”»ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®æ•°
+	// @param  : æç”»ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã®é…åˆ—
+	// @param  : æ·±åº¦ï¼ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ã‚’è¨­å®šã—ãªã„
+	pContext->OMSetRenderTargets
+	(
+		1,
+		&pRenderTargetView, 
+		nullptr
+	);
+#pragma endregion æç”»ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã—ã¦è¨­å®š
+
+
+
+
+#pragma region SetViewport
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã®è¨­å®š
+	D3D11_VIEWPORT viewPort[1];
+
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆé ˜åŸŸã®å·¦ä¸Šã®ï½˜åº§æ¨™
+	viewPort[0].TopLeftX = 0.0f;
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆé ˜åŸŸã®å·¦ä¸Šã®ï½™åº§æ¨™
+	viewPort[0].TopLeftY = 0.0f;
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆé ˜åŸŸã®å¹…
+	viewPort[0].Width = 640.0f;
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆé ˜åŸŸã®é«˜ã•
+	viewPort[0].Height = 480.0f;
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆé ˜åŸŸã®æ·±åº¦å€¤ã®æœ€å°å€¤
+	viewPort[0].MinDepth = 0.0f;
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆé ˜åŸŸã®æ·±åº¦å€¤ã®æœ€å¤§å€¤
+	viewPort[0].MaxDepth = 1.0f;
+
+	// ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã«ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã‚’è¨­å®š
+	pContext->RSSetViewports(1, viewPort);
+
+#pragma endregion ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã®è¨­å®š
+
+#pragma region StencilTexture
+	// æ·±åº¦ï¼ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ä½œæˆ
+	D3D11_TEXTURE2D_DESC depthStencilDesc;
+	// å¹…
+	depthStencilDesc.Width = mWidth;
+	// é«˜ã•
+	depthStencilDesc.Height = mHeight;
+	// ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—ãƒ¬ãƒ™ãƒ«æ•°
+	depthStencilDesc.MipLevels = 1;
+	// é…åˆ—ã‚µã‚¤ã‚º
+	depthStencilDesc.ArraySize = 1;
+	// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆï¼ˆæ·±åº¦ã®ã¿ï¼‰
+	depthStencilDesc.Format = DXGI_FORMAT_D32_FLOAT;
+	// ãƒãƒ«ãƒã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ã®è¨­å®š
+	depthStencilDesc.SampleDesc.Count = 1;
+	// ãƒãƒ«ãƒã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ã®å“è³ª
+	depthStencilDesc.SampleDesc.Quality = 0;
+	// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ä½¿ç”¨æ³•
+	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
+	// æ·±åº¦ï¼ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã¨ã—ã¦ä½¿ç”¨
+	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	// CPUã‹ã‚‰ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹
+	depthStencilDesc.CPUAccessFlags = 0;
+	// ãã®ä»–ã®è¨­å®šãªã—
+	depthStencilDesc.MiscFlags = 0;
+
+	// @brief  : ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œã‚‹
+	// @param  : ä½œæˆã™ã‚‹ï¼’Dãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è¨­å®š
+	// @param  : 
+	// @param  : ä½œæˆã—ãŸãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å—ã‘å–ã‚‹å¤‰æ•°
+	// @return : HRESULTå‹ã®å¤‰æ•°
+	hrlt = pDevice->CreateTexture2D
+	(
+		&depthStencilDesc,
+		nullptr,
+		&pDepthStencil
+	);
+
+	// å¤±æ•—åˆ¤å®š
+	if (FAILED(hrlt))
+	{
+		// é–¢æ•°ã‚’æŠœã‘ã‚‹
+		return false;
+	}
+#pragma endregion ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£
+
+#pragma region StencelTarget
+	// æ·±åº¦ï¼ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
+	D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc;
+	// ãƒ“ãƒ¥ãƒ¼ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+	depthStencilViewDesc.Format = depthStencilDesc.Format;
+	depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	depthStencilViewDesc.Flags = 0;
+	depthStencilViewDesc.Texture2D.MipSlice = 0;
+
+	// @brief  : ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’ä½œã‚‹
+	// @param  : æ·±åº¦ï¼ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ã‚’ä½œã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	// @param  : æ·±åº¦ï¼ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ã®è¨­å®š
+	// @param  : ä½œæˆã—ãŸãƒ“ãƒ¥ãƒ¼ã‚’å—ã‘å–ã‚‹å¤‰æ•°
+	// @return : HRESULTå‹ã®å¤‰æ•°
+	hrlt = pDevice->CreateDepthStencilView
+	(
+		pDepthStencil.Get(),
+		&depthStencilViewDesc,
+		&pDepthStencilView
+	);
+
+	// å¤±æ•—åˆ¤å®š
+	if (FAILED(hrlt))
+	{
+		// é–¢æ•°ã‚’æŠœã‘ã‚‹
+		return false;
+	}
+
+	// @brief  : æ·±åº¦ï¼ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ã®ä½¿ç”¨
+	// @param  : è¨­å®šã™ã‚‹ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã®æ•°
+	// @param  : è¨­å®šã™ã‚‹æç”»ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã®é…åˆ—
+	// @param  : è¨­å®šã™ã‚‹æ·±åº¦ï¼ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼
+	pContext->OMSetRenderTargets
+	(
+		1,
+		&pRenderTargetView,
+		pDepthStencilView.Get()
+	);
+
+
+#pragma endregion ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+
+#pragma region GetInterface
+	hrlt = pDevice.As(&pInterface);
+	// å¤±æ•—åˆ¤å®š
+	if (FAILED(hrlt))
+	{
+		// é–¢æ•°ã‚’æŠœã‘ã‚‹
+		return false;
+	}
+#pragma endregion ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’å–å¾—
+
+#pragma region GetAdapter
+	hrlt = pInterface->GetAdapter(&pAdapter);
+	// å¤±æ•—åˆ¤å®š
+	if (FAILED(hrlt))
+	{
+		// é–¢æ•°ã‚’æŠœã‘ã‚‹
+		return false;
+	}
+#pragma endregion ã‚¢ãƒ€ãƒ—ã‚¿ã‚’å–å¾—
+
+#pragma region GetFactory
+	hrlt = pAdapter->GetParent(__uuidof(IDXGIFactory1), (void**)&pFactory);
+	// å¤±æ•—åˆ¤å®š
+	if (FAILED(hrlt))
+	{
+		// é–¢æ•°ã‚’æŠœã‘ã‚‹
+		return false;
+	}
+#pragma endregion ãƒ•ã‚¡ã‚¯ãƒˆãƒªã‚’å–å¾—
+
+#pragma region ArrowFullScreen
+	hrlt = pFactory->MakeWindowAssociation(mHwnd, 0);
+	// å¤±æ•—åˆ¤å®š
+	if (FAILED(hrlt))
+	{
+		// é–¢æ•°ã‚’æŠœã‘ã‚‹
+		return false;
+	}
+#pragma endregion ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚’è¨±å¯
+
+	// é–¢æ•°ã‚’æŠœã‘ã‚‹
+	return hrlt;
+}
+
+void Direct3D::Update()
+{
+}
+
+void Direct3D::Render()
+{
+}
+
+void Direct3D::CleanUp()
+{
+}
+
+// ------------------------------------------------------------------------------------------------ //
+// @ brief   : ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã®ç”Ÿæˆ                                                       //
+// @ param   : ãªã—                                                                                 //
+// @ return  : ãªã—                                                                                 //
+// @ note    :                                                                                      //
+// ------------------------------------------------------------------------------------------------ // 
+void Direct3D::CreateRenderTargetView()
+{
+	// @brief  : æç”»ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ã‚¯ãƒªã‚¢
+	// @param  : ã‚¯ãƒªã‚¢ã™ã‚‹æç”»ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+	// @param  : ã‚¯ãƒªã‚¢ã™ã‚‹å€¤ï¼ˆRGBAï¼‰
+	pContext->ClearRenderTargetView
+	(
+		pRenderTargetView.Get(),
+		DxColors::FloralWhite
+	);
+}
+
+// ------------------------------------------------------------------------------------------------ //
+// @ brief   : æ·±åº¦ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ                                                                   //
+// @ param   : ãªã—                                                                                 //
+// @ return  : ãªã—                                                                                 //
+// @ note    :                                                                                      //
+// ------------------------------------------------------------------------------------------------ // 
+void Direct3D::CreateDepthStencilView()
+{
+	// @brief  : æ·±åº¦ï¼ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã®ã‚¯ãƒªã‚¢
+	// @param  : ã‚¯ãƒªã‚¢ã™ã‚‹æ·±åº¦ï¼ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼
+	// @param  : æ·±åº¦å€¤ã ã‘ã‚¯ãƒªã‚¢ã™ã‚‹
+	// @param  : æ·±åº¦ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹å€¤
+	// @param  : ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹å€¤ï¼ˆã“ã®å ´åˆã€ç„¡é–¢ä¿‚ï¼‰
+	pContext->ClearDepthStencilView
+	(
+		pDepthStencilView.Get(), 
+		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 
+		1.0f,
+		0
+	);
+}
+
+// ------------------------------------------------------------------------------------------------ //
+// @ brief   : ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ã‚¹ãƒ¯ãƒƒãƒ—                                                             //
+// @ param   : ãªã—                                                                                 //
+// @ return  : ãªã—                                                                                 //
+// @ note    :                                                                                      //
+// ------------------------------------------------------------------------------------------------ // 
+void Direct3D::SwapBackBaffer()
+{
+	// @brief  : ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ã‚¹ãƒ¯ãƒƒãƒ—
+	// @param  : ç”»é¢ã‚’æ›´æ–°ã™ã‚‹ã‚¿ã‚¤ãƒŸãƒ³ã‚°ï¼ˆå‚ç›´å›å¸°ã¨ã®åŒæ™‚å‡¦ç†ã‚’è¨­å®šã™ã‚‹ï¼‰
+	// @param  : ç”»é¢ã‚’å®Ÿéš›ã«æ›´æ–°ã™ã‚‹
+	pSwapChain->Present(0, 0);
+}

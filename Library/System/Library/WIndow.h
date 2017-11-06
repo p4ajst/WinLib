@@ -1,48 +1,51 @@
-//// ------------------------------------------------------------------------------------------------ //
-//// @ file	 : Window.h                                                                                     //
-//// @ brief	 : ƒEƒCƒ“ƒhƒE‚Ì¶¬‚ÉŠÖ‚·‚éƒNƒ‰ƒX                                                                                     //
-//// @ date	 : 2017/10/28                                                                                     //
-//// @ author  : Madoka Nakajima                                                                                     //
-//// @ note	 :                                                                                      //
-//// ------------------------------------------------------------------------------------------------ // 
-//
-///* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
-//#pragma once
-///* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-//// •W€ƒ‰ƒCƒuƒ‰ƒŠ
-//#include <Windows.h>
-//
-///* –¼‘O‹óŠÔ‚ÌéŒ¾ */
-//// ©ì–¼‘O‹óŠÔ
-//namespace mnLib
-//{
-//	/* ƒNƒ‰ƒX‚ÌéŒ¾ */
-//	class Window
-//	{
-//		/* ƒƒ“ƒo•Ï” */
-//		// ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
-//		HWND mHwnd;
-//		// ©g‚Ìƒ|ƒCƒ“ƒ^
-//		Window* mSelf;
-//		/* ƒƒ“ƒoŠÖ” */
-//		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-//		Window() = default;
-//		// ƒfƒXƒgƒ‰ƒNƒ^
-//		~Window() = default;
-//		// ‰Šú‰»
-//		HRESULT WindowsInitialize(HINSTANCE hInstance, int nShowCmd);
-//		HRESULT WindowsInitialize(HINSTANCE hInstance, int nShowCmd, int width, int height);
-//		// ƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ
-//		LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
-//		// Ã“IƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ
-//		static LRESULT CALLBACK BaseWindowProcedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
-//		// ƒƒbƒZ[ƒWƒ‹[ƒv
-//		bool MessageLoop();
-//		// ’l‚Ìİ’è
-//		void SetPointer(HWND hwnd);
-//		// ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹‚ğæ“¾
-//		HWND GetWindowHandle();
-//		// I—¹ˆ—
-//		void Finalize(HINSTANCE hInstance);
-//	};
-//}
+ï»¿// ------------------------------------------------------------------------------------------------ //
+// @ file	 : Window.h                                                                             //
+// @ brief	 : ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ç”Ÿæˆã«é–¢ã™ã‚‹ã‚¯ãƒ©ã‚¹                                                       //
+// @ date	 : 2017/10/28                                                                           //
+// @ author  : Madoka Nakajima                                                                      //
+// @ note	 :                                                                                      //
+// ------------------------------------------------------------------------------------------------ // 
+
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
+#pragma once
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// æ¨™æº–ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
+#include <Windows.h>
+
+/* åå‰ç©ºé–“ã®å®£è¨€ */
+// è‡ªä½œåå‰ç©ºé–“
+namespace mnLib
+{
+	/* ã‚¯ãƒ©ã‚¹ã®å®£è¨€ */
+	class Window
+	{
+	private:
+		/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
+		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+		HWND mHwnd;
+		// è‡ªèº«ã®ãƒã‚¤ãƒ³ã‚¿
+		Window* mSelf;
+
+	public:
+		/* ãƒ¡ãƒ³ãƒé–¢æ•° */
+		// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+		Window() {}
+		// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+		~Window() {}
+		// åˆæœŸåŒ–
+		HRESULT WindowsInitialize(HINSTANCE hInstance, int nShowCmd);
+		HRESULT WindowsInitialize(HINSTANCE hInstance, int nShowCmd, int width, int height);
+		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
+		LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
+		// é™çš„ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
+		static LRESULT CALLBACK BaseWindowProcedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
+		// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—
+		bool MessageLoop();
+		// å€¤ã®è¨­å®š
+		void SetPointer(HWND hwnd);
+		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«ã‚’å–å¾—
+		HWND GetWindowHandle();
+		// çµ‚äº†å‡¦ç†
+		void Finalize(HINSTANCE hInstance);
+	};
+}
