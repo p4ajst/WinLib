@@ -1,5 +1,4 @@
-﻿#include "Direct3D.h"
-// ------------------------------------------------------------------------------------------------ //
+﻿// ------------------------------------------------------------------------------------------------ //
 // @ file   : Direct3D.h                                                                           //
 // @ brief  : DirectX関連のクラス                                                                  //
 // @ date   : 2017/10/29                                                                           //
@@ -23,13 +22,7 @@ using namespace mnLib;
 #pragma endregion マクロの定義
 
 
-/* 定数の定義 */
-/* 変数の定義 */
-/* 列挙体の定義 */
-/* 構造体の定義 */
 /* メンバ関数の定義 */
-/* 関数の定義 */
-
 // ------------------------------------------------------------------------------------------------ //
 // @ brief   : 初期化                                                                               //
 // @ param   : HWND whandle....ウインドウハンドル                                                   //
@@ -52,18 +45,6 @@ HRESULT Direct3D::Initialize(HWND windowHandle)
 	pInterface.Reset();
 	pAdapter.Reset();
 	pFactory.Reset();
-	
-	//pDevice = nullptr;
-	//pContext = nullptr;
-	//pSwapChain = nullptr;
-	//pRenderTargetView = nullptr;
-	//pBackBuffer = nullptr;
-	//pDepthStencil = nullptr;
-	//pDepthStencilView = nullptr;
-	//pInterface = nullptr;
-	//pAdapter = nullptr;
-	//pFactory = nullptr;
-
 
 	mWidth = 0;
 	mHeight = 0;
@@ -94,8 +75,6 @@ HRESULT Direct3D::Initialize(HWND windowHandle)
 		D3D_FEATURE_LEVEL_9_2,
 		D3D_FEATURE_LEVEL_9_1,
 	};
-	// 配列の要素数
-	UINT featureLevels = 6;
 	// デバイス作成時に返される機能レベル
 	D3D_FEATURE_LEVEL featureLevelSupported = D3D_FEATURE_LEVEL_11_0;
 #pragma endregion 機能レベルの配列
@@ -169,7 +148,7 @@ HRESULT Direct3D::Initialize(HWND windowHandle)
 		0,
 		D3D11_CREATE_DEVICE_BGRA_SUPPORT,
 		featureLevel,
-		featureLevels,
+		ARRAYSIZE(featureLevel),
 		D3D11_SDK_VERSION,
 		&swapChainDesc,
 		pSwapChain.GetAddressOf(),
@@ -186,7 +165,7 @@ HRESULT Direct3D::Initialize(HWND windowHandle)
 			0,
 			D3D11_CREATE_DEVICE_BGRA_SUPPORT,
 			featureLevel,
-			featureLevels,
+			ARRAYSIZE(featureLevel),
 			D3D11_SDK_VERSION,
 			&swapChainDesc,
 			pSwapChain.GetAddressOf(),
@@ -420,32 +399,6 @@ void Direct3D::Render()
 
 void Direct3D::CleanUp()
 {
-	//delete pDevice;
-	//delete pContext;
-	//delete pSwapChain;
-	//delete pRenderTargetView;
-	//delete pBackBuffer;
-	//delete pDepthStencil;
-	//delete pDepthStencilView;
-	//delete pInterface;
-	//delete pAdapter;
-	//delete pFactory;
-
-	
-
-	// 
-	// 
-	// 
-	// 
-	// 
-	// 
-	// 
-	// 
-	// 
-	// 
-	// 
-	// 
-	// 
 }
 
 // ------------------------------------------------------------------------------------------------ //
@@ -464,8 +417,6 @@ void Direct3D::CreateRenderTargetView()
 		pRenderTargetView.Get(),
 		DxColors::FloralWhite
 	);
-	//pContext->ClearRenderTargetView(pRenderTargetView, DxColors::FloralWhite);
-
 }
 
 // ------------------------------------------------------------------------------------------------ //
@@ -488,7 +439,6 @@ void Direct3D::CreateDepthStencilView()
 		1.0f,
 		0
 	);
-	//pContext->ClearDepthStencilView(pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
 
 // ------------------------------------------------------------------------------------------------ //

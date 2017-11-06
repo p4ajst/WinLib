@@ -46,11 +46,6 @@
 #pragma endregion ヘッダファイルのインクルード
 
 
-/* 定数の定義 */
-/* 変数の定義 */
-/* 列挙体の定義 */
-/* 構造体の定義 */
-/* 関数のプロトタイプ宣言 */
 /* 名前空間の宣言 */
 // 自作名前空間
 namespace mnLib
@@ -82,28 +77,6 @@ namespace mnLib
 		Microsoft::WRL::ComPtr<IDXGIAdapter> pAdapter;
 		// ファクトリ
 		Microsoft::WRL::ComPtr<IDXGIFactory1> pFactory;
-
-		//// デバイス
-		//ID3D11Device* pDevice;
-		//// デバイスコンテキスト
-		//ID3D11DeviceContext* pContext;
-		//// スワップチェイン
-		//IDXGISwapChain* pSwapChain;
-		//// レンダーターゲットビュー
-		//ID3D11RenderTargetView* pRenderTargetView;
-		//// バックバッファ
-		//ID3D11Texture2D* pBackBuffer;
-		//// 深度ステンシル
-		//ID3D11Texture2D* pDepthStencil;
-		//// 深度ステンシルビュー
-		//ID3D11DepthStencilView* pDepthStencilView;
-		//// インターフェース
-		//IDXGIDevice1* pInterface;
-		//// アダプタ
-		//IDXGIAdapter* pAdapter;
-		//// ファクトリ
-		//IDXGIFactory1* pFactory;
-
 
 		// 画面のサイズ（幅）
 		int mWidth;
@@ -145,18 +118,6 @@ namespace mnLib
 		IDXGIDevice1* GetInterface() { return pInterface.Get(); }
 		IDXGIAdapter* GetAdapter() { return pAdapter.Get(); }
 		IDXGIFactory1* GetFactory() { return pFactory.Get(); }
-
-		//HWND GetHandle() { return mHwnd; }
-		//ID3D11Device* GetDevice() { return pDevice; }
-		//ID3D11DeviceContext* GetContext() { return pContext; }
-		//IDXGISwapChain* GetSwapChain() { return pSwapChain; }
-		//ID3D11RenderTargetView* GetRenderTargetView() { return pRenderTargetView; }
-		//ID3D11Texture2D* GetBackBuffer() { return pBackBuffer; }
-		//ID3D11Texture2D* GetDepthStencil() { return pDepthStencil; }
-		//ID3D11DepthStencilView* GetDepthStencilView() { return pDepthStencilView; }
-		//IDXGIDevice1* GetInterface() { return pInterface; }
-		//IDXGIAdapter* GetAdapter() { return pAdapter; }
-		//IDXGIFactory1* GetFactory() { return pFactory; }
 
 		int GetWidth() { return mWidth; }
 		int GetHeight() { return mHeight; }
