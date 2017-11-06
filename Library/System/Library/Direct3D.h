@@ -1,165 +1,165 @@
-//// ------------------------------------------------------------------------------------------------ //
-//// @ file	 : Direct3D.h                                                                           //
-//// @ brief	 : DirectXŠÖ˜A‚ÌƒNƒ‰ƒX                                                                  //
-//// @ date	 : 2017/10/29                                                                           //
-//// @ author  : Madoka Nakajima                                                                      //
-//// @ note	 :                                                                                      //
-//// ------------------------------------------------------------------------------------------------ // 
-//
-///* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
-//#pragma once
-//
-///* Direct3D 11ŠÖ˜Aƒ‰ƒCƒuƒ‰ƒŠ‚ÌƒŠƒ“ƒN */
-//#pragma region LinkLibrary
-//// uDirect3D 11v—pƒ‰ƒCƒuƒ‰ƒŠ
-//#pragma comment(lib,"d3d11.lib")
-//// ƒfƒoƒbƒOƒrƒ‹ƒh‚©H
-//#if defined(DEBUG)||defined(_DEBUG)
-//// ƒfƒoƒbƒO”Å‚ÌuD3DX 11v—pƒ‰ƒCƒuƒ‰ƒŠ‚ğƒŠƒ“ƒN
-//#pragma comment(lib,"d3dx11d.lib")
-//#else
-//// ƒŠƒŠ[ƒX”Å‚ÌuD3DX 11v—pƒ‰ƒCƒuƒ‰ƒŠ‚ğƒŠƒ“ƒN
-//#pragma comment(lib,"d3dx11.lib")
-//#endif
-//// ƒGƒ‰[ˆ—ƒ†[ƒeƒBƒŠƒeƒBEƒ‰ƒCƒuƒ‰ƒŠ
-//#pragma comment(lib,"dxerr.lib")
-//#pragma endregion Direct3D_11ŠÖ˜Aƒ‰ƒCƒuƒ‰ƒŠ‚ÌƒŠƒ“ƒN
-//
-///* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-//#pragma region IncludeHeaderFile
-//// Œ^ƒ`ƒFƒbƒN‚ğŒµ–§‚És‚¤
-//#define STRICT
-//// ƒwƒbƒ_[‚©‚ç‚ ‚Ü‚èg‚í‚ê‚È‚¢ŠÖ”‚ğÈ‚­
-//#define WIN32_LEAN_AND_MEAN
-//// Windows.h
-//#include <Windows.h>
-//// Direct3D
-//#include <d3d11.h>
-//// Direct3D•D3DXi“à•”‚Åud3d11.hv‚ğƒCƒ“ƒNƒ‹[ƒh‚µ‚Ä‚¢‚éj
-////#include <d3dx11.h>
-//// DirectX‚ÌƒGƒ‰[ˆ—ƒ†[ƒeƒBƒŠƒeƒBEƒ‰ƒCƒuƒ‰ƒŠ
-////#include <dxerr.h>
-//// uMBCSiƒ}ƒ‹ƒ`EƒoƒCƒgEƒLƒƒƒ‰ƒNƒ^EƒZƒbƒgj•¶šƒZƒbƒgv‚ÆuUnicode•¶šƒZƒbƒgv‚Ì—¼•û‚É‘Î‰‚Å‚«‚é
-//#include <tchar.h>
-//// Windows ƒ‰ƒ“ƒ^ƒCƒ€ C++ ƒeƒ“ƒvƒŒ[ƒg ƒ‰ƒCƒuƒ‰ƒŠ
-//#include <WRL.h>
-//#pragma endregion ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh
-//
-//
-///* ’è”‚Ì’è‹` */
-///* •Ï”‚Ì’è‹` */
-///* —ñ‹“‘Ì‚Ì’è‹` */
-///* \‘¢‘Ì‚Ì’è‹` */
-///* ŠÖ”‚Ìƒvƒƒgƒ^ƒCƒvéŒ¾ */
-///* –¼‘O‹óŠÔ‚ÌéŒ¾ */
-//// ©ì–¼‘O‹óŠÔ
-//namespace mnLib
-//{
-//	/* ƒNƒ‰ƒX‚ÌéŒ¾ */
-//	class Direct3D
-//	{
-//	private:
-//		/* ƒƒ“ƒo•Ï” */
-//		// ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
-//		HWND mHwnd;
-//		//// ƒfƒoƒCƒX
-//		//Microsoft::WRL::ComPtr<ID3D11Device> pDevice;
-//		//// ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg
-//		//Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;
-//		//// ƒXƒƒbƒvƒ`ƒFƒCƒ“
-//		//Microsoft::WRL::ComPtr<IDXGISwapChain> pSwapChain;
-//		//// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[
-//		//Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pRenderTargetView;
-//		//// ƒoƒbƒNƒoƒbƒtƒ@
-//		//Microsoft::WRL::ComPtr<ID3D11Texture2D> pBackBuffer;
-//		//// [“xƒXƒeƒ“ƒVƒ‹
-//		//Microsoft::WRL::ComPtr<ID3D11Texture2D> pDepthStencil;
-//		//// [“xƒXƒeƒ“ƒVƒ‹ƒrƒ…[
-//		//Microsoft::WRL::ComPtr<ID3D11DepthStencilView> pDepthStencilView;
-//		//// ƒCƒ“ƒ^[ƒtƒF[ƒX
-//		//Microsoft::WRL::ComPtr<IDXGIDevice1> pInterface;
-//		//// ƒAƒ_ƒvƒ^
-//		//Microsoft::WRL::ComPtr<IDXGIAdapter> pAdapter;
-//		//// ƒtƒ@ƒNƒgƒŠ
-//		//Microsoft::WRL::ComPtr<IDXGIFactory1> pFactory;
-//
-//		// ƒfƒoƒCƒX
-//		ID3D11Device* pDevice;
-//		// ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg
-//		ID3D11DeviceContext* pContext;
-//		// ƒXƒƒbƒvƒ`ƒFƒCƒ“
-//		IDXGISwapChain* pSwapChain;
-//		// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[
-//		ID3D11RenderTargetView* pRenderTargetView;
-//		// ƒoƒbƒNƒoƒbƒtƒ@
-//		ID3D11Texture2D* pBackBuffer;
-//		// [“xƒXƒeƒ“ƒVƒ‹
-//		ID3D11Texture2D* pDepthStencil;
-//		// [“xƒXƒeƒ“ƒVƒ‹ƒrƒ…[
-//		ID3D11DepthStencilView* pDepthStencilView;
-//		// ƒCƒ“ƒ^[ƒtƒF[ƒX
-//		IDXGIDevice1* pInterface;
-//		// ƒAƒ_ƒvƒ^
-//		IDXGIAdapter* pAdapter;
-//		// ƒtƒ@ƒNƒgƒŠ
-//		IDXGIFactory1* pFactory;
-//
-//
-//		// ‰æ–Ê‚ÌƒTƒCƒYi•j
-//		int mWidth;
-//		// ‰æ–Ê‚ÌƒTƒCƒYi‚‚³j
-//		int mHeight;
-//
-//	public:
-//		/* ƒƒ“ƒoŠÖ” */
-//		// ‰Šú‰»ˆ—
-//		HRESULT Initialize(HWND windowHandle);
-//		// XVˆ—
-//		void Update();
-//		// •`‰æˆ—
-//		void Render();
-//		// I—¹ˆ—
-//		void CleanUp();
-//
-//		// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[‚Ì¶¬
-//		void CreateRenderTargetView();
-//		// [“xƒoƒbƒtƒ@‚Ì¶¬
-//		void CreateDepthStencilView();
-//		// ƒoƒbƒNƒoƒbƒtƒ@‚ÌƒXƒƒbƒv
-//		void SwapBackBaffer();
-//
-//#pragma region Setter
-//		void SetWidth(int width) { mWidth = width; }
-//		void SetHeight(int height) { mHeight = height; }
-//#pragma endregion ƒƒ“ƒo•Ï”‚Ìİ’èŠÖ”ŒQ
-//
-//#pragma region Getter
-//		//HWND GetHandle() { return mHwnd; }
-//		//ID3D11Device* GetDevice() { return pDevice.Get(); }
-//		//ID3D11DeviceContext* GetContext() { return pContext.Get(); }
-//		//IDXGISwapChain* GetSwapChain() { return pSwapChain.Get(); }
-//		//ID3D11RenderTargetView* GetRenderTargetView() { return pRenderTargetView.Get(); }
-//		//ID3D11Texture2D* GetBackBuffer() { return pBackBuffer.Get(); }
-//		//ID3D11Texture2D* GetDepthStencil() { return pDepthStencil.Get(); }
-//		//ID3D11DepthStencilView* GetDepthStencilView() { return pDepthStencilView.Get(); }
-//		//IDXGIDevice1* GetInterface() { return pInterface.Get(); }
-//		//IDXGIAdapter* GetAdapter() { return pAdapter.Get(); }
-//		//IDXGIFactory1* GetFactory() { return pFactory.Get(); }
-//
-//		HWND GetHandle() { return mHwnd; }
-//		ID3D11Device* GetDevice() { return pDevice; }
-//		ID3D11DeviceContext* GetContext() { return pContext; }
-//		IDXGISwapChain* GetSwapChain() { return pSwapChain; }
-//		ID3D11RenderTargetView* GetRenderTargetView() { return pRenderTargetView; }
-//		ID3D11Texture2D* GetBackBuffer() { return pBackBuffer; }
-//		ID3D11Texture2D* GetDepthStencil() { return pDepthStencil; }
-//		ID3D11DepthStencilView* GetDepthStencilView() { return pDepthStencilView; }
-//		IDXGIDevice1* GetInterface() { return pInterface; }
-//		IDXGIAdapter* GetAdapter() { return pAdapter; }
-//		IDXGIFactory1* GetFactory() { return pFactory; }
-//
-//		int GetWidth() { return mWidth; }
-//		int GetHeight() { return mHeight; }
-//#pragma endregion ƒƒ“ƒo•Ï”‚Ìæ“¾ŠÖ”ŒQ
-//	};
-//}
+ï»¿// ------------------------------------------------------------------------------------------------ //
+// @ file	 : Direct3D.h                                                                           //
+// @ brief	 : DirectXé–¢é€£ã®ã‚¯ãƒ©ã‚¹                                                                  //
+// @ date	 : 2017/10/29                                                                           //
+// @ author  : Madoka Nakajima                                                                      //
+// @ note	 :                                                                                      //
+// ------------------------------------------------------------------------------------------------ // 
+
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
+#pragma once
+
+/* Direct3D 11é–¢é€£ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®ãƒªãƒ³ã‚¯ */
+#pragma region LinkLibrary
+// ã€ŒDirect3D 11ã€ç”¨ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
+#pragma comment(lib,"d3d11.lib")
+// ãƒ‡ãƒãƒƒã‚°ãƒ“ãƒ«ãƒ‰ã‹ï¼Ÿ
+#if defined(DEBUG)||defined(_DEBUG)
+// ãƒ‡ãƒãƒƒã‚°ç‰ˆã®ã€ŒD3DX 11ã€ç”¨ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’ãƒªãƒ³ã‚¯
+#pragma comment(lib,"d3dx11d.lib")
+#else
+// ãƒªãƒªãƒ¼ã‚¹ç‰ˆã®ã€ŒD3DX 11ã€ç”¨ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’ãƒªãƒ³ã‚¯
+#pragma comment(lib,"d3dx11.lib")
+#endif
+// ã‚¨ãƒ©ãƒ¼å‡¦ç†ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ãƒ»ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
+#pragma comment(lib,"dxerr.lib")
+#pragma endregion Direct3D_11é–¢é€£ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®ãƒªãƒ³ã‚¯
+
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+#pragma region IncludeHeaderFile
+// å‹ãƒã‚§ãƒƒã‚¯ã‚’å³å¯†ã«è¡Œã†
+#define STRICT
+// ãƒ˜ãƒƒãƒ€ãƒ¼ã‹ã‚‰ã‚ã¾ã‚Šä½¿ã‚ã‚Œãªã„é–¢æ•°ã‚’çœã
+#define WIN32_LEAN_AND_MEAN
+// Windows.h
+#include <Windows.h>
+// Direct3D
+#include <d3d11.h>
+// Direct3Dï¼†D3DXï¼ˆå†…éƒ¨ã§ã€Œd3d11.hã€ã‚’ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã—ã¦ã„ã‚‹ï¼‰
+//#include <d3dx11.h>
+// DirectXã®ã‚¨ãƒ©ãƒ¼å‡¦ç†ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ãƒ»ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
+//#include <dxerr.h>
+// ã€ŒMBCSï¼ˆãƒãƒ«ãƒãƒ»ãƒã‚¤ãƒˆãƒ»ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ»ã‚»ãƒƒãƒˆï¼‰æ–‡å­—ã‚»ãƒƒãƒˆã€ã¨ã€ŒUnicodeæ–‡å­—ã‚»ãƒƒãƒˆã€ã®ä¸¡æ–¹ã«å¯¾å¿œã§ãã‚‹
+#include <tchar.h>
+// Windows ãƒ©ãƒ³ã‚¿ã‚¤ãƒ  C++ ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
+#include <WRL.h>
+#pragma endregion ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
+
+
+/* å®šæ•°ã®å®šç¾© */
+/* å¤‰æ•°ã®å®šç¾© */
+/* åˆ—æŒ™ä½“ã®å®šç¾© */
+/* æ§‹é€ ä½“ã®å®šç¾© */
+/* é–¢æ•°ã®ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€ */
+/* åå‰ç©ºé–“ã®å®£è¨€ */
+// è‡ªä½œåå‰ç©ºé–“
+namespace mnLib
+{
+	/* ã‚¯ãƒ©ã‚¹ã®å®£è¨€ */
+	class Direct3D
+	{
+	private:
+		/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
+		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+		HWND mHwnd;
+		// ãƒ‡ãƒã‚¤ã‚¹
+		Microsoft::WRL::ComPtr<ID3D11Device> pDevice;
+		// ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;
+		// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³
+		Microsoft::WRL::ComPtr<IDXGISwapChain> pSwapChain;
+		// ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pRenderTargetView;
+		// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> pBackBuffer;
+		// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> pDepthStencil;
+		// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> pDepthStencilView;
+		// ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
+		Microsoft::WRL::ComPtr<IDXGIDevice1> pInterface;
+		// ã‚¢ãƒ€ãƒ—ã‚¿
+		Microsoft::WRL::ComPtr<IDXGIAdapter> pAdapter;
+		// ãƒ•ã‚¡ã‚¯ãƒˆãƒª
+		Microsoft::WRL::ComPtr<IDXGIFactory1> pFactory;
+
+		//// ãƒ‡ãƒã‚¤ã‚¹
+		//ID3D11Device* pDevice;
+		//// ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ
+		//ID3D11DeviceContext* pContext;
+		//// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³
+		//IDXGISwapChain* pSwapChain;
+		//// ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼
+		//ID3D11RenderTargetView* pRenderTargetView;
+		//// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡
+		//ID3D11Texture2D* pBackBuffer;
+		//// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«
+		//ID3D11Texture2D* pDepthStencil;
+		//// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼
+		//ID3D11DepthStencilView* pDepthStencilView;
+		//// ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
+		//IDXGIDevice1* pInterface;
+		//// ã‚¢ãƒ€ãƒ—ã‚¿
+		//IDXGIAdapter* pAdapter;
+		//// ãƒ•ã‚¡ã‚¯ãƒˆãƒª
+		//IDXGIFactory1* pFactory;
+
+
+		// ç”»é¢ã®ã‚µã‚¤ã‚ºï¼ˆå¹…ï¼‰
+		int mWidth;
+		// ç”»é¢ã®ã‚µã‚¤ã‚ºï¼ˆé«˜ã•ï¼‰
+		int mHeight;
+
+	public:
+		/* ãƒ¡ãƒ³ãƒé–¢æ•° */
+		// åˆæœŸåŒ–å‡¦ç†
+		HRESULT Initialize(HWND windowHandle);
+		// æ›´æ–°å‡¦ç†
+		void Update();
+		// æç”»å‡¦ç†
+		void Render();
+		// çµ‚äº†å‡¦ç†
+		void CleanUp();
+
+		// ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã®ç”Ÿæˆ
+		void CreateRenderTargetView();
+		// æ·±åº¦ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
+		void CreateDepthStencilView();
+		// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ã‚¹ãƒ¯ãƒƒãƒ—
+		void SwapBackBaffer();
+
+#pragma region Setter
+		void SetWidth(int width) { mWidth = width; }
+		void SetHeight(int height) { mHeight = height; }
+#pragma endregion ãƒ¡ãƒ³ãƒå¤‰æ•°ã®è¨­å®šé–¢æ•°ç¾¤
+
+#pragma region Getter
+		HWND GetHandle() { return mHwnd; }
+		ID3D11Device* GetDevice() { return pDevice.Get(); }
+		ID3D11DeviceContext* GetContext() { return pContext.Get(); }
+		IDXGISwapChain* GetSwapChain() { return pSwapChain.Get(); }
+		ID3D11RenderTargetView* GetRenderTargetView() { return pRenderTargetView.Get(); }
+		ID3D11Texture2D* GetBackBuffer() { return pBackBuffer.Get(); }
+		ID3D11Texture2D* GetDepthStencil() { return pDepthStencil.Get(); }
+		ID3D11DepthStencilView* GetDepthStencilView() { return pDepthStencilView.Get(); }
+		IDXGIDevice1* GetInterface() { return pInterface.Get(); }
+		IDXGIAdapter* GetAdapter() { return pAdapter.Get(); }
+		IDXGIFactory1* GetFactory() { return pFactory.Get(); }
+
+		//HWND GetHandle() { return mHwnd; }
+		//ID3D11Device* GetDevice() { return pDevice; }
+		//ID3D11DeviceContext* GetContext() { return pContext; }
+		//IDXGISwapChain* GetSwapChain() { return pSwapChain; }
+		//ID3D11RenderTargetView* GetRenderTargetView() { return pRenderTargetView; }
+		//ID3D11Texture2D* GetBackBuffer() { return pBackBuffer; }
+		//ID3D11Texture2D* GetDepthStencil() { return pDepthStencil; }
+		//ID3D11DepthStencilView* GetDepthStencilView() { return pDepthStencilView; }
+		//IDXGIDevice1* GetInterface() { return pInterface; }
+		//IDXGIAdapter* GetAdapter() { return pAdapter; }
+		//IDXGIFactory1* GetFactory() { return pFactory; }
+
+		int GetWidth() { return mWidth; }
+		int GetHeight() { return mHeight; }
+#pragma endregion ãƒ¡ãƒ³ãƒå¤‰æ•°ã®å–å¾—é–¢æ•°ç¾¤
+	};
+}

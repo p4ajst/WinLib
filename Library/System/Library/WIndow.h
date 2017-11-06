@@ -1,51 +1,51 @@
-// ------------------------------------------------------------------------------------------------ //
-// @ file	 : Window.h                                                                                     //
-// @ brief	 : ƒEƒCƒ“ƒhƒE‚Ì¶¬‚ÉŠÖ‚·‚éƒNƒ‰ƒX                                                                                     //
-// @ date	 : 2017/10/28                                                                                     //
-// @ author  : Madoka Nakajima                                                                                     //
+ï»¿// ------------------------------------------------------------------------------------------------ //
+// @ file	 : Window.h                                                                             //
+// @ brief	 : ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ç”Ÿæˆã«é–¢ã™ã‚‹ã‚¯ãƒ©ã‚¹                                                       //
+// @ date	 : 2017/10/28                                                                           //
+// @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // ------------------------------------------------------------------------------------------------ // 
 
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–hŽ~ */
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
 #pragma once
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// •W€ƒ‰ƒCƒuƒ‰ƒŠ
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// æ¨™æº–ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 #include <Windows.h>
 
-/* –¼‘O‹óŠÔ‚ÌéŒ¾ */
-// Ž©ì–¼‘O‹óŠÔ
+/* åå‰ç©ºé–“ã®å®£è¨€ */
+// è‡ªä½œåå‰ç©ºé–“
 namespace mnLib
 {
-	/* ƒNƒ‰ƒX‚ÌéŒ¾ */
+	/* ã‚¯ãƒ©ã‚¹ã®å®£è¨€ */
 	class Window
 	{
 	private:
-		/* ƒƒ“ƒo•Ï” */
-		// ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
+		/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
+		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 		HWND mHwnd;
-		// Ž©g‚Ìƒ|ƒCƒ“ƒ^
+		// è‡ªèº«ã®ãƒã‚¤ãƒ³ã‚¿
 		Window* mSelf;
 
 	public:
-		/* ƒƒ“ƒoŠÖ” */
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/* ãƒ¡ãƒ³ãƒé–¢æ•° */
+		// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		Window() {}
-		// ƒfƒXƒgƒ‰ƒNƒ^
+		// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		~Window() {}
-		// ‰Šú‰»
+		// åˆæœŸåŒ–
 		HRESULT WindowsInitialize(HINSTANCE hInstance, int nShowCmd);
 		HRESULT WindowsInitialize(HINSTANCE hInstance, int nShowCmd, int width, int height);
-		// ƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ
+		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
 		LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
-		// Ã“IƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ
+		// é™çš„ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
 		static LRESULT CALLBACK BaseWindowProcedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
-		// ƒƒbƒZ[ƒWƒ‹[ƒv
+		// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—
 		bool MessageLoop();
-		// ’l‚ÌÝ’è
+		// å€¤ã®è¨­å®š
 		void SetPointer(HWND hwnd);
-		// ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹‚ðŽæ“¾
+		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«ã‚’å–å¾—
 		HWND GetWindowHandle();
-		// I—¹ˆ—
+		// çµ‚äº†å‡¦ç†
 		void Finalize(HINSTANCE hInstance);
 	};
 }

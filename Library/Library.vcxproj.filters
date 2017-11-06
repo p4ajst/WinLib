@@ -39,14 +39,14 @@
     <ClCompile Include="System\Library\Direct3D.cpp">
       <Filter>mnLib\System\Library</Filter>
     </ClCompile>
-    <ClCompile Include="System\Library\WIndow.cpp">
-      <Filter>mnLib\System\Library</Filter>
-    </ClCompile>
     <ClCompile Include="System\Library\Device.cpp">
       <Filter>mnLib\System\Library</Filter>
     </ClCompile>
     <ClCompile Include="Source\WinMain.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Library\Window.cpp">
+      <Filter>mnLib\System\Library</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,14 +56,14 @@
     <ClInclude Include="System\Library\Direct3D.h">
       <Filter>mnLib\System\Library</Filter>
     </ClInclude>
-    <ClInclude Include="System\Library\WIndow.h">
-      <Filter>mnLib\System\Library</Filter>
-    </ClInclude>
     <ClInclude Include="System\Library\Device.h">
       <Filter>mnLib\System\Library</Filter>
     </ClInclude>
     <ClInclude Include="Utility\Color.h">
       <Filter>mnLib\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Library\Window.h">
+      <Filter>mnLib\System\Library</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

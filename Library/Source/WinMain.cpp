@@ -11,6 +11,7 @@
 #include <Windows.h>
 // 自作ヘッダファイル
 #include "../System/Library/Window.h"
+#include "../System/Library/Direct3D.h"
 
 /* 名前空間 */
 // 自作名前空間
@@ -31,6 +32,7 @@ static const int windowHeight = 960;
 /* メンバ関数 */
 /* メンバ関数の定義 */
 /* 関数の定義 */
+
 // ----------------------------------------------------------------------------------------------- //
 // @ brief  : メイン関数                                                                           //
 // @ param  : HINSTANCE hInstance...アプリケーションの識別                                         //
@@ -42,22 +44,85 @@ static const int windowHeight = 960;
 // ----------------------------------------------------------------------------------------------- // 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
+	// 戻り値
+	HRESULT hrlt;
+
 	// ウインドウクラスのインスタンス
 	Window* window;
 	// インスタンスを生成
 	window = new Window();
 	// 初期化
-	window->WindowsInitialize(hInstance, nShowCmd, windowWidth, windowHeight);
+	hrlt = window->WindowsInitialize(hInstance, nShowCmd, windowWidth, windowHeight);
+	// 失敗処理
+	if (FAILED(hrlt))
+	{
+		return 0;
+	}
+
+	// DirectX関連のクラスのインスタンス
+	Direct3D* direct3d;
+	// インスタンスの生成
+	direct3d = new Direct3D();
+	// 初期化
+	hrlt = direct3d->Initialize(window->GetWindowHandle());
+	// 失敗処理
+	if (FAILED(hrlt))
+	{
+		return 0;
+	}
+	// 画面サイズの設定
+	direct3d->SetWidth(windowWidth);
+	direct3d->SetHeight(windowHeight);
+	// レンダーターゲットの生成
+	direct3d->CreateRenderTargetView();
+	// 深度バッファの生成
+	direct3d->CreateDepthStencilView();
 
 	// メインループ
 	while (window->MessageLoop() != false)
 	{
+		//const char* str = "あいうえおかきくけこ";
+		//// 文字列の大きさ
+		//auto length = strlen(str);
+		//// 文字の表示
+		//TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCWCHAR)str, length);
 
+		direct3d->SwapBackBaffer();
+	}
+
+
+	// デバイスの消失処理
+	hrlt = direct3d->GetDevice()->GetDeviceRemovedReason();
+	switch (hrlt)
+	{
+	case S_OK:
+		// 正常
+		break;
+	case DXGI_ERROR_DEVICE_HUNG:
+	case DXGI_ERROR_DEVICE_RESET:
+		// Direct3Dの解放（アプリケーション定義）
+		
+		// Direct3Dの初期化（アプリケーション定義）
+		hrlt = direct3d->Initialize(window->GetWindowHandle());
+		// 失敗判定
+		if (FAILED(hrlt))
+		{
+			// アプリケーションの終了
+			return false;
+		}
+		break;
+	case DXGI_ERROR_DEVICE_REMOVED:
+	case DXGI_ERROR_DRIVER_INTERNAL_ERROR:
+	case DXGI_ERROR_INVALID_CALL:
+	default:
+		// どうしようもないので、アプリケーションの終了
+		return false;
 	}
 
 
 	// インスタンスを破棄
 	delete window;
+	delete direct3d;
 	// 正常終了
 	return 0;
 }

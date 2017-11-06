@@ -1,86 +1,86 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : Window.h                                                                             //
-// @ brief	 : ƒEƒCƒ“ƒhƒE‚Ì¶¬‚ÉŠÖ‚·‚éƒNƒ‰ƒX                                                       //
+// @ brief	 : ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ç”Ÿæˆã«é–¢ã™ã‚‹ã‚¯ãƒ©ã‚¹                                                       //
 // @ date	 : 2017/10/29                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // ------------------------------------------------------------------------------------------------ // 
 
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "Window.h"
 
-/* –¼‘O‹óŠÔ */
-// ©ì–¼‘O‹óŠÔ
+/* åå‰ç©ºé–“ */
+// è‡ªä½œåå‰ç©ºé–“
 using namespace mnLib;
 
-/* ƒƒ“ƒoŠÖ”‚Ì’è‹` */
+/* ãƒ¡ãƒ³ãƒé–¢æ•°ã®å®šç¾© */
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ƒEƒCƒ“ƒhƒE‚Ì‰Šú‰»                                                                   //
-// @ param	: HINSTANCE hInstance....ƒEƒCƒ“ƒhƒE‚ÌƒCƒ“ƒXƒ^ƒ“ƒX                                      //
-// @ param	: int nShowCmd....ƒVƒ‡[ƒRƒ}ƒ“ƒh                                                       //
-// @ return : HRESULT....HRESULT‚ª‚O‚È‚ç³íA‚»‚êˆÈŠO‚Ì’l‚È‚çˆÙíB                               //
-// @ note	: –³‚µ                                                                                 //
+// @ brief	: ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®åˆæœŸåŒ–                                                                   //
+// @ param	: HINSTANCE hInstance....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹                                      //
+// @ param	: int nShowCmd....ã‚·ãƒ§ãƒ¼ã‚³ãƒãƒ³ãƒ‰                                                       //
+// @ return : HRESULT....HRESULTãŒï¼ãªã‚‰æ­£å¸¸ã€ãã‚Œä»¥å¤–ã®å€¤ãªã‚‰ç•°å¸¸ã€‚                               //
+// @ note	: ç„¡ã—                                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
 HRESULT Window::WindowsInitialize(HINSTANCE hInstance, int nShowCmd)
 {
-	// ƒEƒCƒ“ƒhƒE‚Ìî•ñ‚ğŠi”[‚µ‚½\‘¢‘Ì
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®æƒ…å ±ã‚’æ ¼ç´ã—ãŸæ§‹é€ ä½“
 	WNDCLASSEX wce;
 
-	// \‘¢‘Ì‚Ì‘S‚Ä‚Ì€–Ú‚ğ‚O‚Å‰Šú‰»‚·‚é
+	// æ§‹é€ ä½“ã®å…¨ã¦ã®é …ç›®ã‚’ï¼ã§åˆæœŸåŒ–ã™ã‚‹
 	SecureZeroMemory(&wce, sizeof(wce));
-	// \‘¢‘Ì‚ÌŒã‚ë‚É“®“I‚ÉŠm•Û‚³‚ê‚é—]•ª‚Èƒƒ‚ƒŠB‚O‚Å‰Šú‰»
+	// æ§‹é€ ä½“ã®å¾Œã‚ã«å‹•çš„ã«ç¢ºä¿ã•ã‚Œã‚‹ä½™åˆ†ãªãƒ¡ãƒ¢ãƒªã€‚ï¼ã§åˆæœŸåŒ–
 	wce.cbClsExtra = 0;
-	// \‘¢‘Ì‚Ì‘å‚«‚³
+	// æ§‹é€ ä½“ã®å¤§ãã•
 	wce.cbSize = sizeof(wce);
-	// ƒEƒBƒ“ƒhƒEƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŒã‚ë‚É“®“I‚ÉŠm•Û‚³‚ê‚é—]•ª‚Èƒƒ‚ƒŠB‚O‚Å‰Šú‰»
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å¾Œã‚ã«å‹•çš„ã«ç¢ºä¿ã•ã‚Œã‚‹ä½™åˆ†ãªãƒ¡ãƒ¢ãƒªã€‚ï¼ã§åˆæœŸåŒ–
 	wce.cbWndExtra = 0;
-	// ”wŒiF(•‚Éİ’è)
+	// èƒŒæ™¯è‰²(é»’ã«è¨­å®š)
 	wce.hbrBackground = (HBRUSH)(COLOR_BACKGROUND + 1);
-	// ƒ}ƒEƒXƒJ[ƒ\ƒ‹
+	// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«
 	wce.hCursor = LoadCursor(NULL, IDI_APPLICATION);
-	// ƒAƒCƒRƒ“(ƒfƒXƒNƒgƒbƒv“™‚É•`‰æ‚³‚ê‚é)
+	// ã‚¢ã‚¤ã‚³ãƒ³(ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—ç­‰ã«æç”»ã•ã‚Œã‚‹)
 	wce.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-	// ƒAƒCƒRƒ“(ƒ^ƒXƒNƒo[‚È‚Ç‚É•\¦‚³‚ê‚é)
+	// ã‚¢ã‚¤ã‚³ãƒ³(ã‚¿ã‚¹ã‚¯ãƒãƒ¼ãªã©ã«è¡¨ç¤ºã•ã‚Œã‚‹)
 	wce.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-	// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹
+	// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«
 	wce.hInstance = hInstance;
-	// ƒƒbƒZ[ƒW‚ğó‚¯æ‚éWinProcŠÖ”‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ğ“n‚·B
+	// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘å–ã‚‹WinProcé–¢æ•°ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚’æ¸¡ã™ã€‚
 	wce.lpfnWndProc = BaseWindowProcedure;
-	// ƒEƒCƒ“ƒhƒEƒNƒ‰ƒX‚Ì–¼‘O
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®åå‰
 	wce.lpszClassName = L"Window";
-	// ƒEƒCƒ“ƒhƒE‚ª‚ÂƒfƒtƒHƒ‹ƒg‚Ìƒƒjƒ…[‚ÌƒŠƒ\[ƒX–¼
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãŒæŒã¤ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ãƒªã‚½ãƒ¼ã‚¹å
 	wce.lpszMenuName = NULL;
-	// ƒEƒBƒ“ƒhƒE‚ÌŠî–{«¿‚ğİ’è
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åŸºæœ¬æ€§è³ªã‚’è¨­å®š
 	wce.style = CS_HREDRAW | CS_VREDRAW;
 
-	// WNDCLASSEX‚Ì“o˜^
+	// WNDCLASSEXã®ç™»éŒ²
 	if (!RegisterClassEx(&wce))
 	{
-		// ‚Å‚«‚È‚©‚Á‚½‚ç0‚ğ•Ô‚·
+		// ã§ããªã‹ã£ãŸã‚‰0ã‚’è¿”ã™
 		return 0;
 	}
 
-	// ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 	HWND windowHandle;
 
-	// @brief  : ƒƒCƒ“‚ÌƒEƒCƒ“ƒhƒE‚ğì¬‚·‚é
-	// @param  : DWORD dwExStyle....Šg’£‚·‚éƒEƒBƒ“ƒhƒE‚ÌŒ©‚½–Ú‚Ì×‚©‚ÈƒXƒ^ƒCƒ‹
-	// @param  : LPCTSTR lpClassName....ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Å“o˜^‚µ‚½–¼‘O
-	// @param  : LPCTSTR lpWindowName....ì¬‚·‚éƒEƒBƒ“ƒhƒE‚É•t‚¯‚ç‚ê‚é–¼‘O
-	// @param  : DWORD dwStyle....ì¬‚·‚éƒEƒBƒ“ƒhƒE‚ÌŒ©‚½–Ú‚Ì×‚©‚ÈƒXƒ^ƒCƒ‹
-	// @param  : int x....ƒEƒBƒ“ƒhƒE‚Ì¶ã‚ÌˆÊ’u
-	// @param  : int y....ƒEƒBƒ“ƒhƒE‚Ì¶ã‚ÌˆÊ’u
-	// @param  : int nWidth....ƒEƒBƒ“ƒhƒE‚Ì•
-	// @param  : int nHeight....ƒEƒBƒ“ƒhƒE‚Ì‚‚³
-	// @param  : HWND hWndParent....eƒEƒCƒ“ƒhƒE
-	// @param  : HWND hMenu....ƒEƒCƒ“ƒhƒE‚É‚Â‚­ƒƒjƒ…[ƒnƒ“ƒhƒ‹
-	// @param  : HINSTANCE hInstance....ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹
-	// @param  : LPVOID lpParam....ƒ}ƒ‹ƒ`ƒhƒLƒ…ƒƒ“ƒgƒCƒ“ƒ^[ƒtƒF[ƒXƒEƒCƒ“ƒhƒE‚ğì¬‚·‚é‚Æ‚«‚Ég—p(ƒVƒ“ƒOƒ‹ƒhƒLƒ…ƒƒ“ƒgƒCƒ“ƒ^[ƒtƒF[ƒX‚ÌƒEƒCƒ“ƒhƒE‚Ìê‡‚ÍNULL‚É‚·‚é)
+	// @brief  : ãƒ¡ã‚¤ãƒ³ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã™ã‚‹
+	// @param  : DWORD dwExStyle....æ‹¡å¼µã™ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®è¦‹ãŸç›®ã®ç´°ã‹ãªã‚¹ã‚¿ã‚¤ãƒ«
+	// @param  : LPCTSTR lpClassName....ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã§ç™»éŒ²ã—ãŸåå‰
+	// @param  : LPCTSTR lpWindowName....ä½œæˆã™ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã«ä»˜ã‘ã‚‰ã‚Œã‚‹åå‰
+	// @param  : DWORD dwStyle....ä½œæˆã™ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®è¦‹ãŸç›®ã®ç´°ã‹ãªã‚¹ã‚¿ã‚¤ãƒ«
+	// @param  : int x....ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å·¦ä¸Šã®ä½ç½®
+	// @param  : int y....ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å·¦ä¸Šã®ä½ç½®
+	// @param  : int nWidth....ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å¹…
+	// @param  : int nHeight....ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®é«˜ã•
+	// @param  : HWND hWndParent....è¦ªã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦
+	// @param  : HWND hMenu....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«ã¤ããƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒ³ãƒ‰ãƒ«
+	// @param  : HINSTANCE hInstance....ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+	// @param  : LPVOID lpParam....ãƒãƒ«ãƒãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã™ã‚‹ã¨ãã«ä½¿ç”¨(ã‚·ãƒ³ã‚°ãƒ«ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®å ´åˆã¯NULLã«ã™ã‚‹)
 	windowHandle = CreateWindowEx
 	(NULL
 		, TEXT("Window")
-		, TEXT("ƒƒCƒ“ƒEƒCƒ“ƒhƒE")
+		, TEXT("ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦")
 		, WS_OVERLAPPEDWINDOW | WS_VISIBLE
 		, CW_USEDEFAULT
 		, CW_USEDEFAULT
@@ -95,79 +95,79 @@ HRESULT Window::WindowsInitialize(HINSTANCE hInstance, int nShowCmd)
 		ShowWindow(windowHandle, SW_SHOW);
 	}
 
-	// ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 	mHwnd = windowHandle;
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ƒEƒCƒ“ƒhƒE‚Ì‰Šú‰»                                                                   //
-// @ param	: HINSTANCE hInstance....ƒEƒCƒ“ƒhƒE‚ÌƒCƒ“ƒXƒ^ƒ“ƒX                                      //
-// @ param	: int nShowCmd....ƒVƒ‡[ƒRƒ}ƒ“ƒh                                                       //
-// @ param	: int width....ƒEƒCƒ“ƒhƒE‚Ì•                                                          //
-// @ param	: int height....ƒEƒCƒ“ƒhƒE‚Ì‚‚³                                                       //
-// @ return : HRESULT....HRESULT‚ª‚O‚È‚ç³íA‚»‚êˆÈŠO‚Ì’l‚È‚çˆÙíB                               //
-// @ note	: –³‚µ                                                                                 //
+// @ brief	: ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®åˆæœŸåŒ–                                                                   //
+// @ param	: HINSTANCE hInstance....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹                                      //
+// @ param	: int nShowCmd....ã‚·ãƒ§ãƒ¼ã‚³ãƒãƒ³ãƒ‰                                                       //
+// @ param	: int width....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®å¹…                                                          //
+// @ param	: int height....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®é«˜ã•                                                       //
+// @ return : HRESULT....HRESULTãŒï¼ãªã‚‰æ­£å¸¸ã€ãã‚Œä»¥å¤–ã®å€¤ãªã‚‰ç•°å¸¸ã€‚                               //
+// @ note	: ç„¡ã—                                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
 HRESULT Window::WindowsInitialize(HINSTANCE hInstance, int nShowCmd, int width, int height)
 {
 
-	// ƒEƒCƒ“ƒhƒE‚Ìî•ñ‚ğŠi”[‚µ‚½\‘¢‘Ì
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®æƒ…å ±ã‚’æ ¼ç´ã—ãŸæ§‹é€ ä½“
 	WNDCLASSEX wce;
 
-	// \‘¢‘Ì‚Ì‘S‚Ä‚Ì€–Ú‚ğ‚O‚Å‰Šú‰»‚·‚é
+	// æ§‹é€ ä½“ã®å…¨ã¦ã®é …ç›®ã‚’ï¼ã§åˆæœŸåŒ–ã™ã‚‹
 	SecureZeroMemory(&wce, sizeof(wce));
-	// \‘¢‘Ì‚ÌŒã‚ë‚É“®“I‚ÉŠm•Û‚³‚ê‚é—]•ª‚Èƒƒ‚ƒŠB‚O‚Å‰Šú‰»
+	// æ§‹é€ ä½“ã®å¾Œã‚ã«å‹•çš„ã«ç¢ºä¿ã•ã‚Œã‚‹ä½™åˆ†ãªãƒ¡ãƒ¢ãƒªã€‚ï¼ã§åˆæœŸåŒ–
 	wce.cbClsExtra = 0;
-	// \‘¢‘Ì‚Ì‘å‚«‚³
+	// æ§‹é€ ä½“ã®å¤§ãã•
 	wce.cbSize = sizeof(wce);
-	// ƒEƒBƒ“ƒhƒEƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŒã‚ë‚É“®“I‚ÉŠm•Û‚³‚ê‚é—]•ª‚Èƒƒ‚ƒŠB‚O‚Å‰Šú‰»
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å¾Œã‚ã«å‹•çš„ã«ç¢ºä¿ã•ã‚Œã‚‹ä½™åˆ†ãªãƒ¡ãƒ¢ãƒªã€‚ï¼ã§åˆæœŸåŒ–
 	wce.cbWndExtra = 0;
-	// ”wŒiF(•‚Éİ’è)
+	// èƒŒæ™¯è‰²(é»’ã«è¨­å®š)
 	wce.hbrBackground = (HBRUSH)(COLOR_BACKGROUND + 1);
-	// ƒ}ƒEƒXƒJ[ƒ\ƒ‹
+	// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«
 	wce.hCursor = LoadCursor(NULL, IDI_APPLICATION);
-	// ƒAƒCƒRƒ“(ƒfƒXƒNƒgƒbƒv“™‚É•`‰æ‚³‚ê‚é)
+	// ã‚¢ã‚¤ã‚³ãƒ³(ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—ç­‰ã«æç”»ã•ã‚Œã‚‹)
 	wce.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-	// ƒAƒCƒRƒ“(ƒ^ƒXƒNƒo[‚È‚Ç‚É•\¦‚³‚ê‚é)
+	// ã‚¢ã‚¤ã‚³ãƒ³(ã‚¿ã‚¹ã‚¯ãƒãƒ¼ãªã©ã«è¡¨ç¤ºã•ã‚Œã‚‹)
 	wce.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-	// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹
+	// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«
 	wce.hInstance = hInstance;
-	// ƒƒbƒZ[ƒW‚ğó‚¯æ‚éWinProcŠÖ”‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ğ“n‚·B
+	// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘å–ã‚‹WinProcé–¢æ•°ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚’æ¸¡ã™ã€‚
 	wce.lpfnWndProc = BaseWindowProcedure;
-	// ƒEƒCƒ“ƒhƒEƒNƒ‰ƒX‚Ì–¼‘O
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®åå‰
 	wce.lpszClassName = L"Window";
-	// ƒEƒCƒ“ƒhƒE‚ª‚ÂƒfƒtƒHƒ‹ƒg‚Ìƒƒjƒ…[‚ÌƒŠƒ\[ƒX–¼
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãŒæŒã¤ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ãƒªã‚½ãƒ¼ã‚¹å
 	wce.lpszMenuName = NULL;
-	// ƒEƒBƒ“ƒhƒE‚ÌŠî–{«¿‚ğİ’è
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åŸºæœ¬æ€§è³ªã‚’è¨­å®š
 	wce.style = CS_HREDRAW | CS_VREDRAW;
 
-	// WNDCLASSEX‚Ì“o˜^
+	// WNDCLASSEXã®ç™»éŒ²
 	if (!RegisterClassEx(&wce))
 	{
-		// ‚Å‚«‚È‚©‚Á‚½‚ç0‚ğ•Ô‚·
+		// ã§ããªã‹ã£ãŸã‚‰0ã‚’è¿”ã™
 		return 0;
 	}
 
-	// ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 	HWND windowHandle;
 
-	// @brief  : ƒƒCƒ“‚ÌƒEƒCƒ“ƒhƒE‚ğì¬‚·‚é
-	// @param  : DWORD dwExStyle....Šg’£‚·‚éƒEƒBƒ“ƒhƒE‚ÌŒ©‚½–Ú‚Ì×‚©‚ÈƒXƒ^ƒCƒ‹
-	// @param  : LPCTSTR lpClassName....ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Å“o˜^‚µ‚½–¼‘O
-	// @param  : LPCTSTR lpWindowName....ì¬‚·‚éƒEƒBƒ“ƒhƒE‚É•t‚¯‚ç‚ê‚é–¼‘O
-	// @param  : DWORD dwStyle....ì¬‚·‚éƒEƒBƒ“ƒhƒE‚ÌŒ©‚½–Ú‚Ì×‚©‚ÈƒXƒ^ƒCƒ‹
-	// @param  : int x....ƒEƒBƒ“ƒhƒE‚Ì¶ã‚ÌˆÊ’u
-	// @param  : int y....ƒEƒBƒ“ƒhƒE‚Ì¶ã‚ÌˆÊ’u
-	// @param  : int nWidth....ƒEƒBƒ“ƒhƒE‚Ì•
-	// @param  : int nHeight....ƒEƒBƒ“ƒhƒE‚Ì‚‚³
-	// @param  : HWND hWndParent....eƒEƒCƒ“ƒhƒE
-	// @param  : HWND hMenu....ƒEƒCƒ“ƒhƒE‚É‚Â‚­ƒƒjƒ…[ƒnƒ“ƒhƒ‹
-	// @param  : HINSTANCE hInstance....ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹
-	// @param  : LPVOID lpParam....ƒ}ƒ‹ƒ`ƒhƒLƒ…ƒƒ“ƒgƒCƒ“ƒ^[ƒtƒF[ƒXƒEƒCƒ“ƒhƒE‚ğì¬‚·‚é‚Æ‚«‚Ég—p(ƒVƒ“ƒOƒ‹ƒhƒLƒ…ƒƒ“ƒgƒCƒ“ƒ^[ƒtƒF[ƒX‚ÌƒEƒCƒ“ƒhƒE‚Ìê‡‚ÍNULL‚É‚·‚é)
+	// @brief  : ãƒ¡ã‚¤ãƒ³ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã™ã‚‹
+	// @param  : DWORD dwExStyle....æ‹¡å¼µã™ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®è¦‹ãŸç›®ã®ç´°ã‹ãªã‚¹ã‚¿ã‚¤ãƒ«
+	// @param  : LPCTSTR lpClassName....ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã§ç™»éŒ²ã—ãŸåå‰
+	// @param  : LPCTSTR lpWindowName....ä½œæˆã™ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã«ä»˜ã‘ã‚‰ã‚Œã‚‹åå‰
+	// @param  : DWORD dwStyle....ä½œæˆã™ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®è¦‹ãŸç›®ã®ç´°ã‹ãªã‚¹ã‚¿ã‚¤ãƒ«
+	// @param  : int x....ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å·¦ä¸Šã®ä½ç½®
+	// @param  : int y....ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å·¦ä¸Šã®ä½ç½®
+	// @param  : int nWidth....ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å¹…
+	// @param  : int nHeight....ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®é«˜ã•
+	// @param  : HWND hWndParent....è¦ªã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦
+	// @param  : HWND hMenu....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«ã¤ããƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒ³ãƒ‰ãƒ«
+	// @param  : HINSTANCE hInstance....ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+	// @param  : LPVOID lpParam....ãƒãƒ«ãƒãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã™ã‚‹ã¨ãã«ä½¿ç”¨(ã‚·ãƒ³ã‚°ãƒ«ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®å ´åˆã¯NULLã«ã™ã‚‹)
 	windowHandle = CreateWindowEx
 	(WS_EX_COMPOSITED
 		, TEXT("Window")
-		, TEXT("ƒƒCƒ“ƒEƒCƒ“ƒhƒE")
+		, TEXT("ãƒ¡ã‚¤ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦")
 		, WS_OVERLAPPEDWINDOW | WS_VISIBLE
 		, CW_USEDEFAULT
 		, CW_USEDEFAULT
@@ -182,55 +182,55 @@ HRESULT Window::WindowsInitialize(HINSTANCE hInstance, int nShowCmd, int width, 
 		ShowWindow(windowHandle, SW_SHOW);
 	}
 
-	// ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 	mHwnd = windowHandle;
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ƒR[ƒ‹ƒoƒbƒNŠÖ”                                                                     //
-// @ param	: HWND hwnd....ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹                                                      //
-// @ param	: UINT messege = unsigned int messege....ƒEƒCƒ“ƒhƒEƒƒbƒZ[ƒW‚ğŠi”[                    //
-// @ param	: WPARAM wparam....ƒEƒCƒ“ƒhƒEƒƒbƒZ[ƒW‚²‚Æ‚ÉF‚ñ‚È’l‚ª“ü‚é                            //
-// @ param	: LPARAM lparam....ƒEƒCƒ“ƒhƒEƒƒbƒZ[ƒW‚²‚Æ‚ÉF‚ñ‚È’l‚ª“ü‚é                            //
-// @ return : HRESULT....HRESULT‚ª‚O‚È‚ç³íA‚»‚êˆÈŠO‚Ì’l‚È‚çˆÙíB                               //
-// @ note	: CALLBACK....CALLBACKŠÖ”‚Æ‚µ‚Ä’è‹`‚·‚é‚½‚ß                                           //
+// @ brief	: ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°                                                                     //
+// @ param	: HWND hwnd....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«                                                      //
+// @ param	: UINT messege = unsigned int messege....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ ¼ç´                    //
+// @ param	: WPARAM wparam....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã”ã¨ã«è‰²ã‚“ãªå€¤ãŒå…¥ã‚‹                            //
+// @ param	: LPARAM lparam....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã”ã¨ã«è‰²ã‚“ãªå€¤ãŒå…¥ã‚‹                            //
+// @ return : HRESULT....HRESULTãŒï¼ãªã‚‰æ­£å¸¸ã€ãã‚Œä»¥å¤–ã®å€¤ãªã‚‰ç•°å¸¸ã€‚                               //
+// @ note	: CALLBACK....CALLBACKé–¢æ•°ã¨ã—ã¦å®šç¾©ã™ã‚‹ãŸã‚                                           //
 // ----------------------------------------------------------------------------------------------- // 
 LRESULT CALLBACK Window::WindowProcedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
 {
 	switch (message)
 	{
-		// ¶¬
+		// ç”Ÿæˆ
 	case WM_CREATE:
 		break;
-		// I—¹ˆ—
+		// çµ‚äº†å‡¦ç†
 	case WM_QUIT:
 		break;
-		// ƒEƒCƒ“ƒhƒE‚ğ•Â‚¶‚éi~ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚çŒÄ‚Ño‚³‚ê‚éj
+		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹ï¼ˆÃ—ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‚‰å‘¼ã³å‡ºã•ã‚Œã‚‹ï¼‰
 	case WM_CLOSE:
 		break;
-		// ƒEƒCƒ“ƒhƒE‚ğ•Â‚¶‚éiWM_CLOSE‚Ìˆ—‚ªI‚í‚Á‚½‚çŒÄ‚Ño‚³‚ê‚éj
+		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹ï¼ˆWM_CLOSEã®å‡¦ç†ãŒçµ‚ã‚ã£ãŸã‚‰å‘¼ã³å‡ºã•ã‚Œã‚‹ï¼‰
 	case WM_DESTROY:
-		// ƒEƒCƒ“ƒhƒE‚ğ•Â‚¶‚é
+		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹
 		PostQuitMessage(0);
-		// ƒvƒƒOƒ‰ƒ€‚ğI—¹‚³‚¹‚é
+		// ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’çµ‚äº†ã•ã›ã‚‹
 		exit(0);
 		break;
-		// ƒL[‚ª‰Ÿ‚³‚ê‚½‚Æ‚«
+		// ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã¨ã
 	case WM_KEYDOWN:
 		break;
-		// ƒVƒXƒeƒ€ƒL[‚ª‰Ÿ‚³‚ê‚½‚Æ‚«
+		// ã‚·ã‚¹ãƒ†ãƒ ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã¨ã
 	case WM_SYSKEYDOWN:
 		break;
-		// ¶ƒNƒŠƒbƒN‚ª‚³‚ê‚½‚ç
+		// å·¦ã‚¯ãƒªãƒƒã‚¯ãŒã•ã‚ŒãŸã‚‰
 	case WM_LBUTTONDOWN:
 		break;
-		// ‰EƒNƒŠƒbƒN‚ª‚³‚ê‚½‚ç
+		// å³ã‚¯ãƒªãƒƒã‚¯ãŒã•ã‚ŒãŸã‚‰
 	case WM_RBUTTONDOWN:
 		break;
-		// ^‚ñ’†‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚ç
+		// çœŸã‚“ä¸­ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‚‰
 	case WM_MBUTTONDOWN:
 		break;
-		// ƒEƒCƒ“ƒhƒE“à‚ÅƒJ[ƒ\ƒ‹ˆÚ“®
+		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦å†…ã§ã‚«ãƒ¼ã‚½ãƒ«ç§»å‹•
 	case WM_SETCURSOR:
 		break;
 	default:
@@ -240,81 +240,81 @@ LRESULT CALLBACK Window::WindowProcedure(HWND hwnd, UINT message, WPARAM wparam,
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ƒR[ƒ‹ƒoƒbƒNŠÖ”                                                                     //
-// @ param	: HWND hwnd....ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹                                                      //
-// @ param	: UINT messege = unsigned int messege....ƒEƒCƒ“ƒhƒEƒƒbƒZ[ƒW‚ğŠi”[                    //
-// @ param	: WPARAM wparam....ƒEƒCƒ“ƒhƒEƒƒbƒZ[ƒW‚²‚Æ‚ÉF‚ñ‚È’l‚ª“ü‚é                            //
-// @ param	: LPARAM lparam....ƒEƒCƒ“ƒhƒEƒƒbƒZ[ƒW‚²‚Æ‚ÉF‚ñ‚È’l‚ª“ü‚é                            //
-// @ return : HRESULT....HRESULT‚ª‚O‚È‚ç³íA‚»‚êˆÈŠO‚Ì’l‚È‚çˆÙíB                               //
-// @ note	: CALLBACK....CALLBACKŠÖ”‚Æ‚µ‚Ä’è‹`‚·‚é‚½‚ß                                           //
+// @ brief	: ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°                                                                     //
+// @ param	: HWND hwnd....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«                                                      //
+// @ param	: UINT messege = unsigned int messege....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ ¼ç´                    //
+// @ param	: WPARAM wparam....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã”ã¨ã«è‰²ã‚“ãªå€¤ãŒå…¥ã‚‹                            //
+// @ param	: LPARAM lparam....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã”ã¨ã«è‰²ã‚“ãªå€¤ãŒå…¥ã‚‹                            //
+// @ return : HRESULT....HRESULTãŒï¼ãªã‚‰æ­£å¸¸ã€ãã‚Œä»¥å¤–ã®å€¤ãªã‚‰ç•°å¸¸ã€‚                               //
+// @ note	: CALLBACK....CALLBACKé–¢æ•°ã¨ã—ã¦å®šç¾©ã™ã‚‹ãŸã‚                                           //
 // ----------------------------------------------------------------------------------------------- // 
 LRESULT Window::BaseWindowProcedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
 {
-	// ©g‚Ìƒ|ƒCƒ“ƒ^
+	// è‡ªèº«ã®ãƒã‚¤ãƒ³ã‚¿
 	Window* window;
 	/*
-		ƒEƒCƒ“ƒhƒE¶¬‚·‚é‚Æ‚«‚Éİ’è‚µ‚½’l‚ğó‚¯æ‚é
-		(Window*)....©g‚Ìƒ|ƒCƒ“ƒ^Œ^‚ÅƒLƒƒƒXƒg
-		(GetWindowLongPtr(hwnd, GWLP_USERDATA)....CreateWindowEx‚ÌÅŒã‚Ìˆø”(©•ª‚Ìƒ|ƒCƒ“ƒ^)‚ğæ“¾
+		ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ç”Ÿæˆã™ã‚‹ã¨ãã«è¨­å®šã—ãŸå€¤ã‚’å—ã‘å–ã‚‹
+		(Window*)....è‡ªèº«ã®ãƒã‚¤ãƒ³ã‚¿å‹ã§ã‚­ãƒ£ã‚¹ãƒˆ
+		(GetWindowLongPtr(hwnd, GWLP_USERDATA)....CreateWindowExã®æœ€å¾Œã®å¼•æ•°(è‡ªåˆ†ã®ãƒã‚¤ãƒ³ã‚¿)ã‚’å–å¾—
 	 */
 	window = (Window*)(GetWindowLongPtr(hwnd, GWLP_USERDATA));
-	// ©g‚Ìƒ|ƒCƒ“ƒ^‚É’l‚ª“ü‚Á‚Ä‚¢‚È‚©‚Á‚½‚ç
+	// è‡ªèº«ã®ãƒã‚¤ãƒ³ã‚¿ã«å€¤ãŒå…¥ã£ã¦ã„ãªã‹ã£ãŸã‚‰
 	if (window == nullptr)
 	{
-		// ƒƒbƒZ[ƒW‚ğŠm”F(WM_CREATE‚¾‚Á‚½‚ç)
+		// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ç¢ºèª(WM_CREATEã ã£ãŸã‚‰)
 		if (message == WM_CREATE)
 		{
-			// lparam‚Ì’l‚ğ‚à‚ç‚¤
+			// lparamã®å€¤ã‚’ã‚‚ã‚‰ã†
 			window = (Window*)(((LPCREATESTRUCT)lparam)->lpCreateParams);
 		}
-		// ©g‚Ìƒ|ƒCƒ“ƒ^‚É’l‚ª“ü‚Á‚Ä‚¢‚½‚ç
+		// è‡ªèº«ã®ãƒã‚¤ãƒ³ã‚¿ã«å€¤ãŒå…¥ã£ã¦ã„ãŸã‚‰
 		if (window != nullptr)
 		{
-			// ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹‚Ì’l‚ğİ’è‚·‚é
+			// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«ã®å€¤ã‚’è¨­å®šã™ã‚‹
 			window->SetPointer(hwnd);
 		}
 	}
-	// ©g‚Ìƒ|ƒCƒ“ƒ^‚É’l‚ª“ü‚Á‚Ä‚¢‚½‚ç
+	// è‡ªèº«ã®ãƒã‚¤ãƒ³ã‚¿ã«å€¤ãŒå…¥ã£ã¦ã„ãŸã‚‰
 	if (window != nullptr)
 	{
-		// ƒI[ƒo[ƒ‰ƒCƒh‚µ‚½ƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ
+		// ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã—ãŸã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
 		return window->WindowProcedure(hwnd, message, wparam, lparam);
 	}
 	else
 	{
-		// ƒfƒtƒHƒ‹ƒg‚ÌƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ
+		// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
 		return DefWindowProc(hwnd, message, wparam, lparam);
 	}
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ƒƒbƒZ[ƒWƒ‹[ƒv                                                                     //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : boolŒ^                                                                               //
-// @ note	: ‚È‚µ                                                                                 //
+// @ brief	: ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—                                                                     //
+// @ param	: ãªã—                                                                                 //
+// @ return : boolå‹                                                                               //
+// @ note	: ãªã—                                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
 bool Window::MessageLoop()
 {
 	/*
-		ƒƒbƒZ[ƒWƒ‹[ƒv‚ğó‚¯æ‚é
-		LPMSG lpMesg....ƒƒbƒZ[ƒWî•ñ(MSG\‘¢‘Ì‚Ìƒ|ƒCƒ“ƒ^)
-		HWND hWnd....ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
-		UINT wMsgFilterMin....æ“¾‘ÎÛƒƒbƒZ[ƒW‚ÌÅ¬’l(‚O‚ğw’è‚·‚é)
-		Uint wMsgFilterMax....æ“¾‘ÎÛƒƒbƒZ[ƒW‚ÌÅ‘å’l(‚O‚ğw’è‚·‚é)
+		ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—ã‚’å—ã‘å–ã‚‹
+		LPMSG lpMesg....ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸æƒ…å ±(MSGæ§‹é€ ä½“ã®ãƒã‚¤ãƒ³ã‚¿)
+		HWND hWnd....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+		UINT wMsgFilterMin....å–å¾—å¯¾è±¡ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®æœ€å°å€¤(ï¼ã‚’æŒ‡å®šã™ã‚‹)
+		Uint wMsgFilterMax....å–å¾—å¯¾è±¡ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®æœ€å¤§å€¤(ï¼ã‚’æŒ‡å®šã™ã‚‹)
 	*/
 
-	// ƒƒbƒZ[ƒWƒ‹[ƒv‚Ì\‘¢‘Ì
+	// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—ã®æ§‹é€ ä½“
 	MSG msg;
 
-	// \‘¢‘Ì‚ğ‚O‚Å‰Šú‰»
+	// æ§‹é€ ä½“ã‚’ï¼ã§åˆæœŸåŒ–
 	ZeroMemory(&msg, sizeof(msg));
 
-	// æ“¾‚µ‚½ƒƒbƒZ[ƒWƒ‹[ƒv‚ªI—¹‚¶‚á‚È‚©‚Á‚½‚ç
+	// å–å¾—ã—ãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—ãŒçµ‚äº†ã˜ã‚ƒãªã‹ã£ãŸã‚‰
 	if (PeekMessage(&msg, mHwnd, 0, 0, PM_REMOVE) != WM_QUIT)
 	{
-		// ƒƒbƒZ[ƒW‚Ì–|–ó
+		// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ç¿»è¨³
 		TranslateMessage(&msg);
-		// æ“¾‚µ‚½ƒƒbƒZ[ƒW‚ğƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ‚É‘—‚é
+		// å–å¾—ã—ãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ã«é€ã‚‹
 		DispatchMessage(&msg);
 		return true;
 	}
@@ -325,30 +325,30 @@ bool Window::MessageLoop()
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ’l‚ğİ’è‚·‚é                                                                         //
-// @ param	: HWND hwnd....ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹                                                      //
-// @ return : ‚È‚µ                                                                                 //
-// @ note	: ‚È‚µ                                                                                 //
+// @ brief	: å€¤ã‚’è¨­å®šã™ã‚‹                                                                         //
+// @ param	: HWND hwnd....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«                                                      //
+// @ return : ãªã—                                                                                 //
+// @ note	: ãªã—                                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
 void Window::SetPointer(HWND hwnd)
 {
 	/*
-	’l‚ğİ’è
-	hwnd....ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
-	GWLP_USERDATA....CreateWindowEx‚ÌÅŒã‚Ìˆø”(©•ª‚Ìƒ|ƒCƒ“ƒ^)
-	reinterpret_cast<LONG_PTR>(this)....‹­§“I‚ÉLONG_PTRŒ^‚ÉƒLƒƒƒXƒg‚³‚ê‚½©•ª‚Ìƒ|ƒCƒ“ƒ^
+	å€¤ã‚’è¨­å®š
+	hwnd....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+	GWLP_USERDATA....CreateWindowExã®æœ€å¾Œã®å¼•æ•°(è‡ªåˆ†ã®ãƒã‚¤ãƒ³ã‚¿)
+	reinterpret_cast<LONG_PTR>(this)....å¼·åˆ¶çš„ã«LONG_PTRå‹ã«ã‚­ãƒ£ã‚¹ãƒˆã•ã‚ŒãŸè‡ªåˆ†ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
 	SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
 
-	// ˆø”‚Å‚à‚ç‚Á‚½ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹‚ğƒƒ“ƒo•Ï”‚ÌƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹‚É‘ã“ü
+	// å¼•æ•°ã§ã‚‚ã‚‰ã£ãŸã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«ã‚’ãƒ¡ãƒ³ãƒå¤‰æ•°ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«ã«ä»£å…¥
 	this->mHwnd = hwnd;
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹‚Ìæ“¾                                                             //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : HWND hwnd....ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹                                                      //
-// @ note	: ‚È‚µ                                                                                 //
+// @ brief	: ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«ã®å–å¾—                                                             //
+// @ param	: ãªã—                                                                                 //
+// @ return : HWND hwnd....ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«                                                      //
+// @ note	: ãªã—                                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
 HWND Window::GetWindowHandle()
 {
@@ -356,14 +356,14 @@ HWND Window::GetWindowHandle()
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: I—¹ˆ—                                                                             //
-// @ param	: HINSTANCE hInstance...‰ğ•ú‚µ‚½‚¢ƒEƒCƒ“ƒhƒEƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX                       //
-// @ return : ‚È‚µ                                                                                 //
-// @ note	: ‚È‚µ                                                                                 //
+// @ brief	: çµ‚äº†å‡¦ç†                                                                             //
+// @ param	: HINSTANCE hInstance...è§£æ”¾ã—ãŸã„ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹                       //
+// @ return : ãªã—                                                                                 //
+// @ note	: ãªã—                                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
 void Window::Finalize(HINSTANCE hInstance)
 {
-	// ƒEƒCƒ“ƒhƒEƒNƒ‰ƒX‰ğ•ú
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹è§£æ”¾
 	UnregisterClass(L"Window", hInstance);
 }
-/* ŠÖ”‚Ì’è‹` */
+/* é–¢æ•°ã®å®šç¾© */
