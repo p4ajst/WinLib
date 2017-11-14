@@ -12,6 +12,7 @@
 // 自作ヘッダファイル
 #include "../System/Library/Window.h"
 #include "../System/Library/Direct3D.h"
+#include "../System/Library/Device.h"
 
 /* 名前空間 */
 // 自作名前空間
@@ -76,6 +77,30 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//auto length = strlen(str);
 		//// 文字の表示
 		//TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCWCHAR)str, length);
+		if (Input::Keyboard::Touch(VK_BACK))
+		{
+			const char* str = "あいうえお";
+			// 文字列の大きさ
+			auto length = strlen(str);
+			// 文字の表示
+			TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCWCHAR)str, length);
+		}
+		if (Input::Keyboard::Touch(VK_ESCAPE))
+		{
+			const char* str = "かきくけこ";
+			// 文字列の大きさ
+			auto length = strlen(str);
+			// 文字の表示
+			TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCWCHAR)str, length);
+		}
+		if (Input::Mouse::Click(VK_RBUTTON))
+		{
+			const char* str = "かたくりこ";
+			// 文字列の大きさ
+			auto length = strlen(str);
+			// 文字の表示
+			TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCWCHAR)str, length);
+		}
 
 		direct3d->SwapBackBaffer();
 	}
