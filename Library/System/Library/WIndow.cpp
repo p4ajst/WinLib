@@ -48,7 +48,7 @@ HRESULT Window::WindowsInitialize(HINSTANCE hInstance, int nShowCmd)
 	// メッセージを受け取るWinProc関数へのポインタを渡す。
 	wce.lpfnWndProc = BaseWindowProcedure;
 	// ウインドウクラスの名前
-	wce.lpszClassName = L"Window";
+	wce.lpszClassName = "Window";
 	// ウインドウが持つデフォルトのメニューのリソース名
 	wce.lpszMenuName = NULL;
 	// ウィンドウの基本性質を設定
@@ -135,7 +135,7 @@ HRESULT Window::WindowsInitialize(HINSTANCE hInstance, int nShowCmd, int width, 
 	// メッセージを受け取るWinProc関数へのポインタを渡す。
 	wce.lpfnWndProc = BaseWindowProcedure;
 	// ウインドウクラスの名前
-	wce.lpszClassName = L"Window";
+	wce.lpszClassName = "Window";
 	// ウインドウが持つデフォルトのメニューのリソース名
 	wce.lpszMenuName = NULL;
 	// ウィンドウの基本性質を設定
@@ -364,6 +364,6 @@ HWND Window::GetWindowHandle()
 void Window::Finalize(HINSTANCE hInstance)
 {
 	// ウインドウクラス解放
-	UnregisterClass(L"Window", hInstance);
+	UnregisterClass("Window", hInstance);
 }
 /* 関数の定義 */

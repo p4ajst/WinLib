@@ -72,18 +72,18 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// メインループ
 	while (window->MessageLoop() != false)
 	{
-		//const char* str = "あいうえおかきくけこ";
-		//// 文字列の大きさ
-		//auto length = strlen(str);
-		//// 文字の表示
-		//TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCWCHAR)str, length);
+		const char* str = "あいうえおかきくけこ";
+		// 文字列の大きさ
+		auto length = strlen(str);
+		// 文字の表示
+		TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCSTR)str, length);
 		if (Input::Keyboard::Touch(VK_BACK))
 		{
 			const char* str = "あいうえお";
 			// 文字列の大きさ
 			auto length = strlen(str);
 			// 文字の表示
-			TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCWCHAR)str, length);
+			TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCSTR)str, length);
 		}
 		if (Input::Keyboard::Touch(VK_ESCAPE))
 		{
@@ -91,7 +91,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			// 文字列の大きさ
 			auto length = strlen(str);
 			// 文字の表示
-			TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCWCHAR)str, length);
+			TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCSTR)str, length);
 		}
 		if (Input::Mouse::Click(VK_RBUTTON))
 		{
@@ -99,9 +99,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			// 文字列の大きさ
 			auto length = strlen(str);
 			// 文字の表示
-			TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCWCHAR)str, length);
+			TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCSTR)str, length);
 		}
 
+		// バッファのスワップ
 		direct3d->SwapBackBaffer();
 	}
 
