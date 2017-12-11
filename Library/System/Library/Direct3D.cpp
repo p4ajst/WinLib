@@ -14,6 +14,7 @@
 /* 名前空間 */
 // 自作名前空間
 using namespace mnLib;
+using namespace mnLib::DirectXColors;
 
 /* マクロの定義 */
 #pragma region DefinitionMacro
@@ -415,7 +416,7 @@ void Direct3D::CreateRenderTargetView()
 	pContext->ClearRenderTargetView
 	(
 		pRenderTargetView.Get(),
-		DxColors::FloralWhite
+		FloralWhite
 	);
 }
 

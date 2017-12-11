@@ -11,6 +11,8 @@
 /* ヘッダファイルのインクルード */
 // 標準ライブラリ
 #include <Windows.h>
+// 自作ヘッダファイル
+#include "../../Utility/Utility.h"
 
 /* 名前空間の宣言 */
 // 自作名前空間
@@ -25,6 +27,9 @@ namespace mnLib
 		HWND mHwnd;
 		// 自身のポインタ
 		Window* mSelf;
+
+
+		DELETE_COPY_AND_ASSIGN(Window)
 
 	public:
 		/* メンバ関数 */

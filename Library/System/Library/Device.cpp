@@ -10,14 +10,10 @@
 // 自作ヘッダファイル
 #include "Device.h"
 
-/* 定数の定義 */
-/* 変数の定義 */
-/* 列挙体の定義 */
-/* 構造体の定義 */
 /* 名前空間の定義 */
 // 自作名前空間
 using namespace mnLib::Input;
-/* メンバ関数の定義 */
+
 /* 関数の定義 */
 // ------------------------------------------------------------------------------------------------ //
 // @ brief   : 初期化                                                                               //
@@ -28,9 +24,8 @@ using namespace mnLib::Input;
 bool __stdcall Keyboard::Touch(DWORD key)
 {
 	// トリガー処理用に前のキーを保存
-	DWORD prevKey;
-	// キーを保存
-	prevKey = key;
+	static DWORD prevKey = NULL;
+	
 	// どのキーが押されたか
 	switch (key)
 	{
@@ -201,18 +196,22 @@ bool __stdcall Keyboard::Touch(DWORD key)
 	case VK_PA1:
 	case VK_OEM_CLEAR:
 
-	default:
-		break;
-	}
 	// トリガー処理
-	if (prevKey == key)
+	if ((GetAsyncKeyState(key) & 0x8000) && prevKey != key)
 	{
-		return false;
+		// キーを保存
+		prevKey = key;
+		return true;
 	}
 	else
 	{
-		return true;
+		// キーの初期化
+		prevKey = NULL;
 	}
+	default:
+		break;
+	}
+	return false;
 }
 
 bool __stdcall Keyboard::Press(DWORD key)
@@ -386,6 +385,17 @@ bool __stdcall Keyboard::Press(DWORD key)
 	case VK_PA1:
 	case VK_OEM_CLEAR:
 
+
+	// トリガー処理
+	if (GetAsyncKeyState(key) & 0x8000)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
 	default:
 		break;
 	}
@@ -395,7 +405,7 @@ bool __stdcall Keyboard::Press(DWORD key)
 bool __stdcall Mouse::Click(DWORD click)
 {
 	// トリガー処理用にマウスのボタンを保存
-	DWORD prevBotton;
+	static DWORD prevBotton;
 	// マウスのボタンを保存
 	prevBotton = click;
 	switch (click)
@@ -410,16 +420,7 @@ bool __stdcall Mouse::Click(DWORD click)
 		break;
 	}
 
-	// トリガー処理
-	if (prevBotton == click)
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
-
+	return false;
 }
 
 

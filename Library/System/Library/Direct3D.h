@@ -44,6 +44,9 @@
 // Windows ランタイム C++ テンプレート ライブラリ
 #include <WRL.h>
 #pragma endregion ヘッダファイルのインクルード
+// 自作ヘッダファイル
+#include "../../Utility/Utility.h"
+
 
 
 /* 名前空間の宣言 */
@@ -83,8 +86,15 @@ namespace mnLib
 		// 画面のサイズ（高さ）
 		int mHeight;
 
+	private:
+		DELETE_COPY_AND_ASSIGN(Direct3D)
+
 	public:
 		/* メンバ関数 */
+		// コンストラクタ
+		Direct3D() = default;
+		// デストラクタ
+		~Direct3D() = default;
 		// 初期化処理
 		HRESULT Initialize(HWND windowHandle);
 		// 更新処理

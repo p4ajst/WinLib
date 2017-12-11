@@ -18,7 +18,7 @@
 namespace mnLib
 {
 	// 色
-	namespace DxColors
+	namespace DirectXColors
 	{
 		static auto AliceBlue = DirectX::Colors::AliceBlue;
 		static auto AntiqueWhite = DirectX::Colors::AntiqueWhite;

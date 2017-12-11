@@ -79,27 +79,27 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCSTR)str, length);
 		if (Input::Keyboard::Touch(VK_BACK))
 		{
-			const char* str = "あいうえお";
+			str = "まかろん";
 			// 文字列の大きさ
-			auto length = strlen(str);
+			length = strlen(str);
 			// 文字の表示
-			TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCSTR)str, length);
+			TextOut(GetDC(window->GetWindowHandle()), 200, 200, (LPCSTR)str, length);
 		}
 		if (Input::Keyboard::Touch(VK_ESCAPE))
 		{
-			const char* str = "かきくけこ";
+			str = "かたくりこ";
 			// 文字列の大きさ
-			auto length = strlen(str);
+			length = strlen(str);
 			// 文字の表示
-			TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCSTR)str, length);
+			TextOut(GetDC(window->GetWindowHandle()), 20, 20, (LPCSTR)str, length);
 		}
 		if (Input::Mouse::Click(VK_RBUTTON))
 		{
-			const char* str = "かたくりこ";
+			str = "水ようかん";
 			// 文字列の大きさ
-			auto length = strlen(str);
+			length = strlen(str);
 			// 文字の表示
-			TextOut(GetDC(window->GetWindowHandle()), 0, 0, (LPCSTR)str, length);
+			TextOut(GetDC(window->GetWindowHandle()), 20, 50, (LPCSTR)str, length);
 		}
 
 		// バッファのスワップ
@@ -134,7 +134,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		// どうしようもないので、アプリケーションの終了
 		return false;
 	}
-
 
 	// インスタンスを破棄
 	delete window;
