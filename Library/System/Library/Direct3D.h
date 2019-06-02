@@ -15,14 +15,14 @@
 #pragma comment(lib,"d3d11.lib")
 // デバッグビルドか？
 #if defined(DEBUG)||defined(_DEBUG)
-// デバッグ版の「D3DX 11」用ライブラリをリンク
-#pragma comment(lib,"d3dx11d.lib")
+//// デバッグ版の「D3DX 11」用ライブラリをリンク
+//#pragma comment(lib,"d3dx11d.lib")
 #else
 // リリース版の「D3DX 11」用ライブラリをリンク
 #pragma comment(lib,"d3dx11.lib")
 #endif
-// エラー処理ユーティリティ・ライブラリ
-#pragma comment(lib,"dxerr.lib")
+//// エラー処理ユーティリティ・ライブラリ
+//#pragma comment(lib,"dxerr.lib")
 #pragma endregion Direct3D_11関連ライブラリのリンク
 
 /* ヘッダファイルのインクルード */
@@ -112,8 +112,8 @@ namespace mnLib
 		void SwapBackBaffer();
 
 #pragma region Setter
-		void SetWidth(int width) { mWidth = width; }
-		void SetHeight(int height) { mHeight = height; }
+		//void SetWidth(int width) { mWidth = width; }
+		//void SetHeight(int height) { mHeight = height; }
 #pragma endregion メンバ変数の設定関数群
 
 #pragma region Getter

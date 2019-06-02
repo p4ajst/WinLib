@@ -1,7 +1,7 @@
 ﻿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : Window.h                                                                             //
 // @ brief	 : ウインドウの生成に関するクラス                                                       //
-// @ date	 : 2017/10/28                                                                           //
+// @ date	 : 2019/05/29                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // ------------------------------------------------------------------------------------------------ // 
@@ -45,9 +45,11 @@ namespace mnLib
 		// 静的ウインドウプロシージャ
 		static LRESULT CALLBACK BaseWindowProcedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
 		// メッセージループ
-		bool MessageLoop();
+		void MessageLoop();
 		// 値の設定
 		void SetPointer(HWND hwnd);
+		// ウインドウを閉じるかどうか
+		bool QuitWindow();
 		// ウインドウハンドルを取得
 		HWND GetWindowHandle();
 		// 終了処理
