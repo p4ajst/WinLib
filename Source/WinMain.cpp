@@ -1,7 +1,7 @@
 ﻿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : WinMain.cpp                                                                          //
 // @ brief	 : ウインドウを描画するためのエントリーポイント                                         //
-// @ date	 : 2019/05/30                                                                           //
+// @ date	 : 2019/06/30                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // ------------------------------------------------------------------------------------------------ // 
@@ -50,24 +50,24 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return 0;
 	}
 
-	//// DirectX関連のクラスのインスタンス
-	//Direct3D* direct3d;
-	//// インスタンスの生成
-	//direct3d = new Direct3D();
-	//// 初期化
-	//hrlt = direct3d->Initialize(window->GetWindowHandle());
-	//// 失敗処理
-	//if (FAILED(hrlt))
-	//{
-	//	return 0;
-	//}
-	//// 画面サイズの設定
-	////direct3d->SetWidth(windowWidth);
-	////direct3d->SetHeight(windowHeight);
-	//// レンダーターゲットの生成
-	//direct3d->CreateRenderTargetView();
-	//// 深度バッファの生成
-	//direct3d->CreateDepthStencilView();
+	// DirectX関連のクラスのインスタンス
+	Direct3D* direct3d;
+	// インスタンスの生成
+	direct3d = new Direct3D();
+	// 初期化
+	hrlt = direct3d->Initialize(window->GetWindowHandle());
+	// 失敗処理
+	if (FAILED(hrlt))
+	{
+		return 0;
+	}
+	// 画面サイズの設定
+	direct3d->SetWidth(windowWidth);
+	direct3d->SetHeight(windowHeight);
+	// レンダーターゲットの生成
+	direct3d->CreateRenderTargetView();
+	// 深度バッファの生成
+	direct3d->CreateDepthStencilView();
 
 	// メインループ
 	while (window->QuitWindow() == false)
@@ -102,43 +102,43 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//	TextOut(GetDC(window->GetWindowHandle()), 20, 50, (LPCSTR)str, length);
 		//}
 
-		//// バッファのスワップ
-		//direct3d->SwapBackBaffer();
+		// バッファのスワップ
+		direct3d->SwapBackBaffer();
 	}
 
 
-	//// デバイスの消失処理
-	//hrlt = direct3d->GetDevice()->GetDeviceRemovedReason();
+	// デバイスの消失処理
+	hrlt = direct3d->GetDevice()->GetDeviceRemovedReason();
 
-	//switch (hrlt)
-	//{
-	//case S_OK:
-	//	// 正常
-	//	break;
-	//case DXGI_ERROR_DEVICE_HUNG:
-	//case DXGI_ERROR_DEVICE_RESET:
-	//	// Direct3Dの解放（アプリケーション定義）
-	//	
-	//	// Direct3Dの初期化（アプリケーション定義）
-	//	hrlt = direct3d->Initialize(window->GetWindowHandle());
-	//	// 失敗判定
-	//	if (FAILED(hrlt))
-	//	{
-	//		// アプリケーションの終了
-	//		return false;
-	//	}
-	//	break;
-	//case DXGI_ERROR_DEVICE_REMOVED:
-	//case DXGI_ERROR_DRIVER_INTERNAL_ERROR:
-	//case DXGI_ERROR_INVALID_CALL:
-	//default:
-	//	// どうしようもないので、アプリケーションの終了
-	//	return false;
-	//}
+	switch (hrlt)
+	{
+	case S_OK:
+		// 正常
+		break;
+	case DXGI_ERROR_DEVICE_HUNG:
+	case DXGI_ERROR_DEVICE_RESET:
+		// Direct3Dの解放（アプリケーション定義）
+		
+		// Direct3Dの初期化（アプリケーション定義）
+		hrlt = direct3d->Initialize(window->GetWindowHandle());
+		// 失敗判定
+		if (FAILED(hrlt))
+		{
+			// アプリケーションの終了
+			return false;
+		}
+		break;
+	case DXGI_ERROR_DEVICE_REMOVED:
+	case DXGI_ERROR_DRIVER_INTERNAL_ERROR:
+	case DXGI_ERROR_INVALID_CALL:
+	default:
+		// どうしようもないので、アプリケーションの終了
+		return false;
+	}
 
 	// インスタンスを破棄
 	delete window;
-	//delete direct3d;
+	delete direct3d;
 	// 正常終了
 	return 0;
 }

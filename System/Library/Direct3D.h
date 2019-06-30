@@ -1,7 +1,7 @@
 ﻿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : Direct3D.h                                                                           //
 // @ brief	 : DirectX関連のクラス                                                                  //
-// @ date	 : 2017/10/29                                                                           //
+// @ date	 : 2019/06/30                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // ------------------------------------------------------------------------------------------------ // 
@@ -112,8 +112,8 @@ namespace mnLib
 		void SwapBackBaffer();
 
 #pragma region Setter
-		//void SetWidth(int width) { mWidth = width; }
-		//void SetHeight(int height) { mHeight = height; }
+		void SetWidth(int width) { mWidth = width; }
+		void SetHeight(int height) { mHeight = height; }
 #pragma endregion メンバ変数の設定関数群
 
 #pragma region Getter
